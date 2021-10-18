@@ -1,19 +1,13 @@
 import { Meta, Story } from "@storybook/react";
-import { Logo, LogoProps, LogoType } from "./Logo";
+import { BigLogo, SmallLogo } from "./LogoStyle";
 
 export default {
-  component: Logo,
+  component: SmallLogo,
   title: "Components/Logo",
 } as Meta;
 
-const Template: Story<LogoProps> = (args) => <Logo {...args} />;
+const TemplateSmall: Story = (args) => <SmallLogo {...args} />;
+export const small = TemplateSmall.bind({});
 
-export const smallLogo = Template.bind({});
-smallLogo.args = {
-    className: LogoType.SMALL
-};
-
-export const bigLogo = Template.bind({});
-bigLogo.args = {
-    className: LogoType.BIG
-};
+const TemplateBig: Story = (args) => <BigLogo {...args} />;
+export const big = TemplateBig.bind({});

@@ -1,14 +1,11 @@
 import { Meta, Story } from "@storybook/react";
-import { Tag, TagProps } from "./Tag";
+import { TagStyle } from "./TagStyle";
 
 export default {
-  component: Tag,
+  component: TagStyle,
   title: "Components/Tag",
 } as Meta;
 
-const Template: Story<TagProps> = (args) => <Tag {...args} />;
-
+const Template: Story = (args) => <TagStyle {...args} />;
 export const V1 = Template.bind({});
-V1.args = {
-    text: "Israel"
-};
+V1.args = {children: '#tag'}

@@ -7,21 +7,10 @@ display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
-padding: 3px 10px;
-
+padding: 0.1875rem 0.625rem;
 font-family: Poppins;
 font-style: normal;
-font-weight: 500;
-font-size: 12px;
-line-height: 14px;
-
-position: static;
-width: 53px;
-left: calc(50% - 85px/2 - 54.5px);
-top: 4.55%;
-bottom: 4.55%;
 color: #5A5A89;
-
 background: #F3F3FF;
 border-radius: 10px;
 `;

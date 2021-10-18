@@ -1,37 +1,26 @@
 import { Meta, Story } from "@storybook/react";
-import { Button, ButtonProps, ButtonType } from "./Button";
+import { PrimaryButton, WelcomeButton, SecondaryButton, TextButton, ButtonIcon } from "./ButtonStyle";
 
 export default {
-  component: Button,
+  component: PrimaryButton,
   title: "Components/Button",
 } as Meta;
 
-const Template: Story<ButtonProps> = (args) => <Button {...args} />;
+const TemplatePrimary: Story = (args) => <PrimaryButton {...args} />;
+export const Primary = TemplatePrimary.bind({});
+Primary.args = { children: "PRIMARY"}
 
-export const Primary = Template.bind({});
-Primary.args = {
-  className: ButtonType.PRIMARY,
-  text: "Primary",
-  hasIcon: false,
-};
+// ADD BUTTON WITH ICON
 
-export const Secondary = Template.bind({});
-Secondary.args = {
-  className:ButtonType.SECONDARY,
-  text: "Secondery",
-  hasIcon: false
-};
+const TemplateSecondary: Story = (args) => <SecondaryButton {...args} />;
+export const Secondary = TemplateSecondary.bind({});
+Secondary.args = { children : 'SECONDARY'}
 
-export const TextBtn = Template.bind({});
-TextBtn.args = {
-  className:ButtonType.TEXT,
-  text: "Text Button",
-  hasIcon: false
-};
+const TemplateWelcome: Story = (args) => <WelcomeButton {...args} />;
+export const Welcome = TemplateWelcome.bind({});
+Welcome.args = { children : 'Welcome'}
 
-export const welcome = Template.bind({});
-welcome.args = {
-  className:ButtonType.WELCOME,
-  text: "welcome",
-  hasIcon: false
-};
+
+const TemplateText: Story = (args) => <TextButton {...args} />;
+export const Text = TemplateText.bind({});
+Text.args = { children : 'TEXT BUTTON'}
