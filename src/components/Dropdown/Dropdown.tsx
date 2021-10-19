@@ -9,17 +9,17 @@ export interface DropdownProps{
 }
 export const  Dropdown = ({title, items}:DropdownProps) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(null);
+    const [selectedOption, setSelectedOption] = useState('');
 
-    const onOptionClicked = (value: any) => {
+    const onOptionClicked = (value: string) => {
         setSelectedOption(value)
         setIsOpen(false)
     }
-    const toggling = () => setIsOpen(!isOpen);
+    const toggling = () => setIsOpen((prevIsOpen) => !prevIsOpen);
     return <DropdownContainer>
-        <DropdownHeader onClick={toggling}>{selectedOption || title} <img src={DownIcon} alt="down icon of dropdown"></img></DropdownHeader>
-        {isOpen && <div><DropdownList>
+        <DropdownHeader onClick={toggling}>{selectedOption !== '' ?  selectedOption : title} <img src={DownIcon} alt="down icon of dropdown"></img></DropdownHeader>
+        {isOpen && <DropdownList>
         {items.map(item =>  <DropdownItem onClick={() => onOptionClicked(item)} key={Math.random()}>{item}</DropdownItem>)}
-        </DropdownList></div>}
+        </DropdownList>}
     </DropdownContainer>
 }

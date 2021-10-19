@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BLUE, GREY, LIGHT_GREY_2, TEXT_BTN_BACKGROUND } from "../../Colors";
 import Arrow from './Arrow - Right.svg'
 
 export const ButtonStyled = styled.button`
@@ -23,8 +24,8 @@ export const ButtonIcon = styled.img.attrs({arc: Arrow})`
 `
 
 export const PrimaryButton = styled(ButtonStyled)`
-    color: #FFFFFF;
-    background: #0058B9;
+    color: white;
+    background: ${BLUE};
     border-radius: 1.25rem;
     &:hover{
     opacity: 0.8;
@@ -32,27 +33,27 @@ export const PrimaryButton = styled(ButtonStyled)`
 `
 
 export const WelcomeButton = styled(ButtonStyled)`
-     color: #FFFFFF;
+     color: white;
      width: 90%;
-     background: #0058B9;
+     background: ${BLUE};
      border-radius: 0.625rem;
      &:hover{
     opacity: 0.8;
     }
 `
 export const SecondaryButton = styled(ButtonStyled)`
-    color: #5A5A89;
-    background: #D9DBE9;
+    color: ${GREY};
+    background: ${LIGHT_GREY_2};
     border-radius: 1.25rem;
     &:hover{
     opacity: 0.8;
     }
 `
 export const TextButton = styled(ButtonStyled)`
-     color: #5A5A89;
+     color: ${GREY};
      background: white;
      &:hover{
-     background: rgba(217, 219, 233, 0.3);
+     background: ${TEXT_BTN_BACKGROUND};
      border-radius: 1.25rem;
  }
 `
