@@ -8,6 +8,8 @@ flex-direction: row;
 justify-content: center;
 align-items: center;
 padding: 0.1875rem 0.625rem;
+width: fit-content;
+height: fit-content;
 font-family: Poppins;
 font-style: normal;
 color: #5A5A89;
