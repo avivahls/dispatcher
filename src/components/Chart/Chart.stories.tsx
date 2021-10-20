@@ -1,6 +1,11 @@
 import { Meta, Story } from "@storybook/react";
-import BasicChart, { ChartProps, chartState, ChartType } from "./BasicChart";
-
+import BasicChart, {
+  BarChartState,
+  ChartProps,
+  ChartType,
+  DoughnutChartState,
+  LineChartState,
+} from "./BasicChart";
 
 export default {
   component: BasicChart,
@@ -11,20 +16,19 @@ const Template: Story<ChartProps> = (args) => <BasicChart {...args} />;
 export const bar = Template.bind({});
 bar.args = {
   chartType: ChartType.Bar,
-  state: chartState
-}
-
+  state: BarChartState,
+};
 
 const Template1: Story<ChartProps> = (args) => <BasicChart {...args} />;
 export const line = Template1.bind({});
 line.args = {
   chartType: ChartType.Line,
-  state: chartState
-}
+  state: LineChartState,
+};
 
 const Template3: Story<ChartProps> = (args) => <BasicChart {...args} />;
-export const Doughnut = Template1.bind({});
+export const Doughnut = Template3.bind({});
 Doughnut.args = {
   chartType: ChartType.Doughnut,
-  state: chartState
-}
+  state: DoughnutChartState,
+};
