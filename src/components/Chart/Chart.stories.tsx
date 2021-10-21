@@ -1,11 +1,6 @@
 import { Meta, Story } from "@storybook/react";
-import BasicChart, {
-  BarChartState,
-  ChartProps,
-  ChartType,
-  DoughnutChartState,
-  LineChartState,
-} from "./BasicChart";
+import { BarChartState, DoughnutChartState, LineChartState } from "../../App";
+import BasicChart, { ChartProps, ChartType } from "./BasicChart";
 
 export default {
   component: BasicChart,
