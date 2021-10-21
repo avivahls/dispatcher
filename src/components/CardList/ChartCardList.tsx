@@ -8,7 +8,7 @@ import {
   LineChartState,
 } from "../../App";
 import ChartCard from "../Card/ChartCard";
-import { ChartType } from "../Chart/BasicChart";
+import { ChartType } from "../Chart/ChartType";
 import { ChartCardListStyle } from "./CardListStyle";
 
 const ChartCardList: FC = () => {

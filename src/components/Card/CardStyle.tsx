@@ -14,8 +14,8 @@ export const BasicCard = styled.div`
 `;
 
 export const DataCardStyle = styled(BasicCard)`
-  margin: 0 0 20px 0;
-  width: fit-content;
+  margin: 0 10px 20px 0;
+  width: 100%;
   height: 15.125rem;
 `;
 export const ChartCardStyle = styled(BasicCard)`
