@@ -5,21 +5,20 @@ import "./../../index.css";
 export const DropdownContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: fit-content;
-  margin: 0 auto;
+  width: 200px;
+  margin: 0 5px;
 `;
 export const DropdownHeader = styled.div`
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   color: ${GREY};
   cursor: pointer;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.375rem;
-  padding: 0 0.9375rem;
-  font-size: 1.5rem;
+  margin: 0;
+  margin-bottom: 5px;
+  padding: 10px 10px;
+  font-size: 1.3rem;
   background: white;
   border-radius: 0.625rem;
   border: 0.0625rem solid ${BORDER_COLOR};
@@ -38,6 +37,7 @@ export const DropdownList = styled.ul`
   border-radius: 0.625rem;
   overflow: scroll;
   height: 7.875rem;
+  z-index: 6;
   &::-webkit-scrollbar {
     background: none;
     width: 0.375rem;
