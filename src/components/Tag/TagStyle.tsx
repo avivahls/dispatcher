@@ -1,19 +1,19 @@
 import styled from "styled-components";
-import './../../index.css';
+import { GREY, LIGHT_GREY_3 } from "../../Colors";
+import "./../../index.css";
 
 export const TagStyle = styled.p`
-
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 0.1875rem 0.625rem;
-width: fit-content;
-height: fit-content;
-font-family: Poppins;
-font-style: normal;
-color: #5A5A89;
-background: #F3F3FF;
-border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 10px;
+  margin: 0px 6px;
+  width: fit-content;
+  height: fit-content;
+  font-family: Poppins;
+  font-style: normal;
+  color: ${GREY};
+  background: ${LIGHT_GREY_3};
+  border-radius: 10px;
 `;
-
