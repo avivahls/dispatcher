@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import DownIcon from "./dropdown.svg";
+import { useCallback } from "react";
+import DownIcon from "../../assets/dropdown.svg";
 import {
   DropdownContainer,
   DropdownHeader,
@@ -10,17 +11,20 @@ import {
 export interface DropdownProps {
   title: string;
   items: string[];
-  onOptionClicked?: (item: string) => void;
+  onOptionClicked: (item: string) => void;
 }
 export const Dropdown = ({ title, items }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
 
-  const onOptionClicked = (value: string) => {
+  const onOptionClicked = useCallback((value: string) => {
     setSelectedOption(value);
     setIsOpen(false);
-  };
-  const toggling = () => setIsOpen((prevIsOpen) => !prevIsOpen);
+  }, []);
+  const toggling = useCallback(() => {
+    setIsOpen((prevIsOpen) => !prevIsOpen);
+  }, []);
+
   return (
     <DropdownContainer>
       <DropdownHeader onClick={toggling}>
@@ -28,18 +32,16 @@ export const Dropdown = ({ title, items }: DropdownProps) => {
         <img src={DownIcon} alt="down icon of dropdown"></img>
       </DropdownHeader>
       {isOpen && (
-        <div>
-          <DropdownList>
-            {items.map((item) => (
-              <DropdownItem
-                onClick={() => onOptionClicked(item)}
-                key={Math.random()}
-              >
-                {item}
-              </DropdownItem>
-            ))}
-          </DropdownList>
-        </div>
+        <DropdownList>
+          {items.map((item) => (
+            <DropdownItem
+              onClick={() => onOptionClicked(item)}
+              key={Math.random()}
+            >
+              {item}
+            </DropdownItem>
+          ))}
+        </DropdownList>
       )}
     </DropdownContainer>
   );

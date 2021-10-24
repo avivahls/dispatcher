@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import logo from "./LOGO.svg";
+import logo from "../../assets/LOGO.svg";
 
 export const LogoStyle = styled.img.attrs({ src: logo })`
   display: flex;

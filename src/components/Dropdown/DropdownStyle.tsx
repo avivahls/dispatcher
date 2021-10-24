@@ -28,13 +28,13 @@ export const DropdownList = styled.ul`
   padding: 0;
   margin: 0;
   margin-bottom: 0;
-  padding-top: 0.625rem;
+  padding-top: 10px;
   box-sizing: border-box;
-  font-size: 1.3rem;
+  font-size: 20.8px;
   background: white;
-  border: 0.0625rem solid ${BORDER_COLOR};
-  box-shadow: 0rem 0.25rem 0.75rem rgba(0, 0, 0, 0.08);
-  border-radius: 0.625rem;
+  border: 1px solid ${BORDER_COLOR};
+  box-shadow: 0px 4px 12px ${SHADOW};
+  border-radius: 10px;
   overflow: scroll;
   height: 7.875rem;
   z-index: 6;
@@ -51,13 +51,13 @@ export const DropdownList = styled.ul`
   }
 `;
 export const DropdownItem = styled.li`
-  padding: 0.3125rem;
-  padding-left: 0.9375rem;
+  padding: 5px;
+  padding-left: 15px;
   font-family: Mulish;
   color: ${GREY};
   background-color: white;
   margin-bottom: 0.8em;
   &:hover {
-    background: rgba(223, 224, 235, 0.41);
+    background: ${DROPDOWN_HOVER};
   }
 `;
