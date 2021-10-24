@@ -1,9 +1,8 @@
 import styled from "styled-components";
+import { FlexCol, FlexRow } from "../../Style/layouts";
 
-export const CardList = styled.div`
-  display: flex;
+export const CardList = styled(FlexCol)`
   padding: 0;
-  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   overflow: scroll;
@@ -20,9 +19,7 @@ export const ChartCardListStyle = styled(CardList)`
   width: 34%;
 `;
 
-export const Dashboard = styled.div`
-  display: flex;
-  flex-direction: row;
+export const Dashboard = styled(FlexRow)`
   width: 100%;
   height: 100%;
   justify-content: space-between;

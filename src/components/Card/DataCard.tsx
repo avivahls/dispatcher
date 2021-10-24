@@ -1,5 +1,6 @@
 import React, { FC, useCallback } from "react";
 import { Icon, PrimaryButton } from "../Button/ButtonStyle";
+import moment from "moment";
 import {
   CardDescription,
   CardSource,
@@ -19,14 +20,8 @@ export interface DataCardProps {
 
 const DataCard: FC<DataCardProps> = ({ data }) => {
   const formatDate = useCallback((date: string) => {
-    const tempDate = new Date(date);
-    const options: {} = {
-      weekday: "long",
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    };
-    return tempDate.toLocaleDateString("en-US", options);
+    const temp = moment(date).format("dddd ll");
+    return temp;
   }, []);
 
   return (

@@ -13,8 +13,10 @@ export const LIGHT_GREY_4 = "#F8F8FF";
 
 export const TEXT_BTN_BACKGROUND = "rgba(217, 219, 233, 0.3)";
 export const BORDER_COLOR = "#E7E8E9";
-
+export const SHADOW = "rgba(0, 0, 0, 0.05)";
 export const LINE_BACKGROUND = "rgba(0, 185, 255, 0.2)";
+export const CARD_HEADER = "rgba(90, 90, 137, 0.5)";
+export const DROPDOWN_HOVER = "rgba(223, 224, 235, 0.41)";
 export const CHART_COLORS = [
   ORANGE_COLOR,
   DARK_BLUE,

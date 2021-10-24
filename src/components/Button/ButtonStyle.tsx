@@ -2,31 +2,29 @@ import styled from "styled-components";
 import { BLUE, GREY, LIGHT_GREY_2, TEXT_BTN_BACKGROUND } from "../../Colors";
 
 export const ButtonStyled = styled.button`
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 0.3125rem 1rem;
+  padding: 5px 16px;
   border: none;
   font-style: normal;
   font-weight: 500;
-  font-size: 0.875rem;
-  line-height: 1.625rem;
+  font-size: 14px;
+  line-height: 26px;
 `;
 
 export const Icon = styled.img`
   flex: none;
   order: 1;
   flex-grow: 0;
-  margin: 0rem 0.5rem;
+  margin: 0px 8px;
 `;
 
 export const PrimaryButton = styled(ButtonStyled)`
   color: white;
   background: ${BLUE};
-  border-radius: 1.25rem;
+  border-radius: 20px;
   &:hover {
     opacity: 0.8;
   }
@@ -36,7 +34,7 @@ export const WelcomeButton = styled(ButtonStyled)`
   color: white;
   width: 90%;
   background: ${BLUE};
-  border-radius: 0.625rem;
+  border-radius: 10px;
   &:hover {
     opacity: 0.8;
   }
@@ -44,7 +42,7 @@ export const WelcomeButton = styled(ButtonStyled)`
 export const SecondaryButton = styled(ButtonStyled)`
   color: ${GREY};
   background: ${LIGHT_GREY_2};
-  border-radius: 1.25rem;
+  border-radius: 20px;
   &:hover {
     opacity: 0.8;
   }
@@ -54,6 +52,6 @@ export const TextButton = styled(ButtonStyled)`
   background: white;
   &:hover {
     background: ${TEXT_BTN_BACKGROUND};
-    border-radius: 1.25rem;
+    border-radius: 20px;
   }
 `;

@@ -1,22 +1,19 @@
 import styled from "styled-components";
+import { CARD_HEADER, GREY, LIGHT_GREY_2, SHADOW } from "../../Colors";
+import { FlexRow, FlexRowCenter } from "../../Style/layouts";
 
-export const BasicCard = styled.div`
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+export const BasicCard = styled(FlexRowCenter)`
   align-items: center;
   background: white;
-  border: 1px solid #d9dbe9;
-  box-shadow: 0px 32px 64px rgba(0, 0, 0, 0.05);
+  border: 1px solid ${LIGHT_GREY_2};
+  box-shadow: 0px 32px 64px ${SHADOW};
   border-radius: 20px;
 `;
 
 export const DataCardStyle = styled(BasicCard)`
   margin: 0 10px 20px 0;
   width: 100%;
-  height: 15.125rem;
+  height: 300px;
 `;
 export const ChartCardStyle = styled(BasicCard)`
   padding: 40px 45px;
@@ -26,18 +23,14 @@ export const ChartCardStyle = styled(BasicCard)`
   width: fit-content;
   height: 300px;
 `;
-export const DataCardHeader = styled.div`
-  display: flex;
-  flex-direction: row;
+export const DataCardHeader = styled(FlexRow)`
   justify-content: space-between;
-  color: rgba(90, 90, 137, 0.5);
+  color: ${CARD_HEADER};
 `;
-export const TagList = styled.div`
-  display: flex;
-  flex-direction: row;
+export const TagList = styled(FlexRow)`
   justify-content: space-between;
   align-items: stretch;
-  color: rgba(90, 90, 137, 0.5);
+  color: ${CARD_HEADER};
 `;
 export const DataCardImg = styled.img`
   width: 25%;
@@ -51,19 +44,19 @@ export const DataCardContent = styled.div`
   padding: 20px;
 `;
 export const ChartDivider = styled.div`
-  background: #5a5a89;
-  border: 4px solid #5a5a89;
-  width: 1.25rem;
-  height: 0rem;
+  background: ${GREY};
+  border: 4px solid ${GREY};
+  width: 20px;
+  height: 0px;
   border-radius: 10px;
 `;
 export const CardSource = styled.div`
-  color: rgba(90, 90, 137, 0.5);
-  margin: 1.25rem auto;
+  color: ${CARD_HEADER};
+  margin: 20px auto;
 `;
 export const CardDescription = styled.div`
-  color: #5a5a89;
-  margin: 1.25rem auto;
+  color: ${GREY};
+  margin: 20px auto;
 `;
 
 export type IData = {
@@ -77,5 +70,3 @@ export type IData = {
   publishedAt: string;
   content: string | null;
 };
-export const Items = styled.div``;
-export const Charts = styled.div``;

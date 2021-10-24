@@ -6,7 +6,7 @@ import {
   DoughnutChartState,
   LineChartOptions,
   LineChartState,
-} from "../../App";
+} from "../../MockData";
 import BasicChart, { ChartProps } from "./BasicChart";
 import { ChartType } from "./ChartType";
 
