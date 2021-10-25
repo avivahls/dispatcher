@@ -5,7 +5,6 @@ export const HeaderStyle = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
   background-color: ${DARK_GREY};
   width: 100%;
   height: 65px;
@@ -18,6 +17,7 @@ export const UserStyle = styled.div`
   height: 50px;
   justify-content: center;
   align-items: center;
+  margin: auto 5px;
 `;
 export const IconsContainer = styled.div`
   display: flex;
@@ -25,6 +25,6 @@ export const IconsContainer = styled.div`
   justify-content: end;
   color: white;
   float: right;
-  margin: 0 5px;
-  width: 10%;
+  margin: 15px 5px;
+  width: 15%;
 `;

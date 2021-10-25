@@ -3,6 +3,7 @@ import { CARD_HEADER, GREY, LIGHT_GREY_2, SHADOW } from "../../Colors";
 import { FlexRow, FlexRowCenter } from "../../Style/layouts";
 
 export const BasicCard = styled(FlexRowCenter)`
+  position: relative;
   align-items: center;
   background: white;
   border: 1px solid ${LIGHT_GREY_2};
@@ -13,15 +14,17 @@ export const BasicCard = styled(FlexRowCenter)`
 export const DataCardStyle = styled(BasicCard)`
   margin: 0 10px 20px 0;
   width: 100%;
-  height: 300px;
+  height: 260px;
 `;
 export const ChartCardStyle = styled(BasicCard)`
-  padding: 40px 45px;
-  margin: 0 0 20px 0;
+  padding: 35px 20px;
+  margin: 0 10px 20px 0;
   flex-direction: column;
   align-items: flex-start;
-  width: fit-content;
+  min-width: 390px;
+  max-width: fit-content;
   height: 300px;
+  border-radius: 20px;
 `;
 export const DataCardHeader = styled(FlexRow)`
   justify-content: space-between;

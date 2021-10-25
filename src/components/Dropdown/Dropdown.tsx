@@ -11,7 +11,7 @@ import {
 export interface DropdownProps {
   title: string;
   items: string[];
-  onOptionClicked: (item: string) => void;
+  onOptionClicked?: (item: string) => void;
 }
 export const Dropdown = ({ title, items }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,16 +32,18 @@ export const Dropdown = ({ title, items }: DropdownProps) => {
         <img src={DownIcon} alt="down icon of dropdown"></img>
       </DropdownHeader>
       {isOpen && (
-        <DropdownList>
-          {items.map((item) => (
-            <DropdownItem
-              onClick={() => onOptionClicked(item)}
-              key={Math.random()}
-            >
-              {item}
-            </DropdownItem>
-          ))}
-        </DropdownList>
+        <div style={{ position: "relative" }}>
+          <DropdownList>
+            {items.map((item) => (
+              <DropdownItem
+                onClick={() => onOptionClicked(item)}
+                key={Math.random()}
+              >
+                {item}
+              </DropdownItem>
+            ))}
+          </DropdownList>
+        </div>
       )}
     </DropdownContainer>
   );

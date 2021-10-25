@@ -32,7 +32,7 @@ export const PrimaryButton = styled(ButtonStyled)`
 
 export const WelcomeButton = styled(ButtonStyled)`
   color: white;
-  width: 90%;
+  width: 100%;
   background: ${BLUE};
   border-radius: 10px;
   &:hover {

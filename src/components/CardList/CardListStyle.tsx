@@ -20,8 +20,11 @@ export const ChartCardListStyle = styled(CardList)`
 `;
 
 export const Dashboard = styled(FlexRow)`
-  width: 100%;
+  position: relative;
+  width: 70%;
+  margin: 0 auto;
   height: 100%;
   justify-content: space-between;
   align-items: stretch;
+  z-index: 1;
 `;

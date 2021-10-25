@@ -1,14 +1,15 @@
 import styled from "styled-components";
+import { FlexCol, FlexRowCenter } from "../../Style/layouts";
 
-export const SearchStyle = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+export const SearchAndRecentContainer = styled(FlexCol)`
+  width: clamp(250px, 45vw, 600px);
+`;
+export const SearchStyle = styled(FlexRowCenter)`
   border-radius: 10px;
   background-color: white;
-  width: fit-content;
-  height: 50px;
+  height: 45px;
   padding: 0;
+  margin: 10px 0px;
 `;
 export const InputStyle = styled.input.attrs({
   type: "text",
@@ -24,4 +25,14 @@ export const InputStyle = styled.input.attrs({
   &::placeholder {
     opacity: 0.5;
   }
+`;
+export const SearchIcon = styled.img`
+  flex: none;
+  width: fit-content;
+  margin: 0rem 0.5rem;
+`;
+export const SearchDivider = styled.div`
+  border: 1px solid #d9dbe9;
+  background-color: #d9dbe9;
+  height: 90%;
 `;

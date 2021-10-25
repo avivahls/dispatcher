@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BORDER_COLOR, GREY } from "../../Colors";
+import { BORDER_COLOR, DROPDOWN_HOVER, GREY, SHADOW } from "../../Colors";
 import "./../../index.css";
 
 export const DropdownContainer = styled.div`
@@ -26,7 +26,7 @@ export const DropdownHeader = styled.div`
 `;
 export const DropdownList = styled.ul`
   padding: 0;
-  margin: 0;
+  margin-top: 10px;
   margin-bottom: 0;
   padding-top: 10px;
   box-sizing: border-box;
@@ -37,7 +37,8 @@ export const DropdownList = styled.ul`
   border-radius: 10px;
   overflow: scroll;
   height: 7.875rem;
-  z-index: 6;
+  position: relative;
+  z-index: 2;
   &::-webkit-scrollbar {
     background: none;
     width: 0.375rem;

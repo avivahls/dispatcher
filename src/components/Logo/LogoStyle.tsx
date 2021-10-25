@@ -21,4 +21,10 @@ export const BigLogo = styled(LogoStyle)`
   height: 36.855rem;
   left: 3.779375rem;
   top: 25.3225rem;
+  @media only screen and (max-width: 770px) {
+    width: 400px;
+    height: 400px;
+    left: 3.779375rem;
+    top: 25.3225rem;
+  }
 `;

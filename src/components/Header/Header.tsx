@@ -9,10 +9,10 @@ import Settings from "./settings.svg";
 const HeaderElement: FC = () => {
   return (
     <HeaderStyle>
-      <div style={{ width: "10%" }}>
+      <div style={{ width: "15%" }}>
         <SmallLogo />
       </div>
-      <div style={{ width: "80%" }}>
+      <div style={{ width: "70%" }}>
         <SearchElement />
       </div>
       <IconsContainer>
