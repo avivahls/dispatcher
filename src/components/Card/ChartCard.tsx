@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import BasicChart from "../Chart/BasicChart";
 import { ChartType, IChartData } from "../Chart/ChartType";
-import { ChartCardStyle, ChartDivider } from "./CardStyle";
+import { ChartCardStyle, ChartCardTitle, ChartDivider } from "./CardStyle";
 
 export interface ChartCardProps {
   title: string;
@@ -12,7 +12,7 @@ export interface ChartCardProps {
 const ChartCard: FC<ChartCardProps> = ({ title, type, state, options }) => {
   return (
     <ChartCardStyle>
-      <h2>{title}</h2>
+      <ChartCardTitle>{title}</ChartCardTitle>
       <ChartDivider></ChartDivider>
       <BasicChart chartType={type} state={state} options={options}></BasicChart>
     </ChartCardStyle>

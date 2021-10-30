@@ -9,21 +9,26 @@ export const BasicCard = styled(FlexRowCenter)`
   border: 1px solid ${LIGHT_GREY_2};
   box-shadow: 0px 32px 64px ${SHADOW};
   border-radius: 20px;
+  overflow: visible;
+  @media only screen and (max-width: 550px) {
+    flex-direction: column;
+    justify-content: center;
+  }
 `;
 
 export const DataCardStyle = styled(BasicCard)`
   margin: 0 10px 20px 0;
   width: 100%;
-  height: 260px;
+  /* height: 260px; */
+  height: fit-content;
 `;
 export const ChartCardStyle = styled(BasicCard)`
   padding: 35px 20px;
   margin: 0 10px 20px 0;
   flex-direction: column;
   align-items: flex-start;
-  min-width: 390px;
-  max-width: fit-content;
   height: 300px;
+  width: fit-content;
   border-radius: 20px;
 `;
 export const DataCardHeader = styled(FlexRow)`
@@ -40,11 +45,24 @@ export const DataCardImg = styled.img`
   height: 100%;
   object-fit: cover;
   border-radius: 20px 0 0 20px;
+  @media only screen and (max-width: 550px) {
+    border-radius: 20px 20px 0 0;
+    width: 100%;
+    height: 33%;
+  }
 `;
 
 export const DataCardContent = styled.div`
   width: 75%;
-  padding: 20px;
+  padding: 15px;
+  @media only screen and (max-width: 550px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 67%;
+    padding-left: 25px;
+  }
 `;
 export const ChartDivider = styled.div`
   background: ${GREY};
@@ -55,13 +73,22 @@ export const ChartDivider = styled.div`
 `;
 export const CardSource = styled.div`
   color: ${CARD_HEADER};
-  margin: 20px auto;
+  margin: auto 0;
 `;
 export const CardDescription = styled.div`
   color: ${GREY};
-  margin: 20px auto;
+  margin: auto;
+  width: fit-content;
+  overflow: auto;
 `;
-
+export const CardTitle = styled.span`
+  font-size: 20px;
+  font-weight: bold;
+`;
+export const ChartCardTitle = styled.span`
+  font-size: 23px;
+  font-weight: bold;
+`;
 export type IData = {
   source: { id: string; name: string };
   tags: string[];

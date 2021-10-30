@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { Dropdown } from "../Dropdown/Dropdown";
+import { SideDropdown } from "../Dropdown/SideBarDropdown";
 import { SideBarContainer } from "./SideBarStyle";
 
 export interface SideBarProps {
@@ -8,7 +9,9 @@ export interface SideBarProps {
 const SideBar: FC<SideBarProps> = ({ isShown }) => {
   return (
     <SideBarContainer isShown={isShown}>
-      FILTER
+      <SideDropdown title="Sources" items={["1", "2"]} />
+
+      {/* FILTER
       <Dropdown
         title="Search in"
         items={["EveryThing", "Top Headlines"]}
@@ -24,7 +27,7 @@ const SideBar: FC<SideBarProps> = ({ isShown }) => {
       <Dropdown
         title="Search in"
         items={["EveryThing", "Top Headlines"]}
-      ></Dropdown>
+      ></Dropdown> */}
     </SideBarContainer>
   );
 };

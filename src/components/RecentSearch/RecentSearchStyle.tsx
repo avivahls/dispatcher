@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DROPDOWN_HOVER } from "../../Colors";
 import { FlexCol, FlexRow } from "../../Style/layouts";
 
 export const RecentSearchContainer = styled(FlexCol)`
@@ -21,4 +22,7 @@ export const RecentSearchItem = styled(FlexRow)`
   font-size: 13px;
   font-weight: normal;
   margin: 5px 0;
+  &:hover {
+    background: ${DROPDOWN_HOVER};
+  }
 `;

@@ -5,6 +5,8 @@ import { IChartData } from "./components/Chart/ChartType";
 ///DUMMY DATA options
 export const LineChartOptions = {
   tension: 1,
+  // height: "100%",
+  // width: "100%",
   fill: {
     target: "origin",
   },
@@ -14,12 +16,16 @@ export const LineChartOptions = {
 export const BarChartOptions = {
   indexAxis: "y",
   borderRadius: 100,
+  // height: "100%",
+  // width: "100%",
   responsive: true,
   maintainAspectRatio: false,
 };
 export const DoughnutChartOptions = {
   cutout: "80%",
   radius: "60%",
+  // height: "100%",
+  // width: "100%",
   responsive: true,
   maintainAspectRatio: false,
 };

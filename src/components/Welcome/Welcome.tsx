@@ -5,7 +5,10 @@ import {
   WelcomeContainer,
   WelcomeContent,
   WelcomeData,
+  WelcomeDivider,
   WelcomeLogo,
+  WelcomeText,
+  WelcomeTitle,
 } from "./WelcomeStyle";
 import Arrow from "../../assets/Arrow - Right.svg";
 
@@ -17,18 +20,12 @@ const Welcome: FC = () => {
       </WelcomeLogo>
       <WelcomeContent>
         <WelcomeData>
-          <div style={{ fontSize: "30px" }}>Welcome to Dispatcher</div>
-          <div style={{ fontSize: "20px" }}>
+          <WelcomeTitle>Welcome to Dispatcher</WelcomeTitle>
+          <WelcomeText>
             Locate articles and breaking news headlines from news sources and
             blogs across the web
-          </div>
-          <div
-            style={{
-              border: "1px solid #D9DBE9",
-              width: "100%",
-              margin: "10px auto",
-            }}
-          ></div>
+          </WelcomeText>
+          <WelcomeDivider />
           <WelcomeButton>
             CONTINUE
             <Icon src={Arrow} />

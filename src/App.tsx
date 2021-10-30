@@ -2,12 +2,17 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import HeaderElement from "./components/Header/Header";
 import FilterBar from "./components/FilterBar/FilterBar";
-import { Dashboard } from "./components/CardList/CardListStyle";
+import {
+  Dashboard,
+  DashboardDivider,
+  DashboardTitle,
+} from "./components/CardList/CardListStyle";
 import axios from "axios";
 import ChartCardList from "./components/CardList/ChartCardList";
 import DataCardList from "./components/CardList/DataCardList";
 import Welcome from "./components/Welcome/Welcome";
 import SideBar from "./components/SideBar/SideBar";
+import { SideDropdown } from "./components/Dropdown/SideBarDropdown";
 
 function App() {
   const [isShown, setIsShown] = useState(false);
@@ -32,39 +37,35 @@ function App() {
   }, []);
 
   return (
-    // <>
-    //   <SideBar isShown={isShown} />
-    //   <div
-    //     style={
-    //       isShown
-    //         ? {
-    //             backgroundColor: "#303032",
-    //             opacity: "0.7",
-    //             zIndex: 4,
-    //           }
-    //         : {}
-    //     }
-    //   >
-    //     <HeaderElement />
-    //     <FilterBar />
-    //     <div
-    //       style={{
-    //         border: "1px solid #D9DBE9",
-    //         width: "70%",
-    //         margin: "0 auto",
-    //       }}
-    //     ></div>
-    //     <h2 onClick={onToggle} style={{ width: "70%", margin: "10px auto" }}>
-    //       Top Headline in Israel
-    //     </h2>
-    //     <Dashboard>
-    //       <DataCardList news={articles} />
-    //       <ChartCardList></ChartCardList>
-    //     </Dashboard>
-    //   </div>
-    // </>
+    <>
+      <SideBar isShown={isShown}>
+        <SideDropdown title="Sources" items={["1", "2"]} />
+      </SideBar>
+      <div
+        style={
+          isShown
+            ? {
+                backgroundColor: "#303032",
+                opacity: "0.7",
+                zIndex: 4,
+              }
+            : {}
+        }
+      >
+        <HeaderElement />
+        <FilterBar />
+        <DashboardDivider />
+        <DashboardTitle onClick={onToggle}>
+          Top Headline in Israel
+        </DashboardTitle>
+        <Dashboard>
+          <DataCardList news={articles} />
+          <ChartCardList></ChartCardList>
+        </Dashboard>
+      </div>
+    </>
 
-    <Welcome />
+    // <Welcome />
   );
 }
 

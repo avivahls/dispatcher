@@ -18,6 +18,14 @@ export const UserStyle = styled.div`
   justify-content: center;
   align-items: center;
   margin: auto 5px;
+  @media only screen and (max-width: 770px) {
+    width: 40px;
+    height: 40px;
+  }
+  @media only screen and (max-width: 550px) {
+    width: 30px;
+    height: 30px;
+  }
 `;
 export const IconsContainer = styled.div`
   display: flex;
@@ -25,6 +33,6 @@ export const IconsContainer = styled.div`
   justify-content: end;
   color: white;
   float: right;
-  margin: 15px 5px;
-  width: 15%;
+  margin: auto 5px;
+  /* width: 10%; */
 `;

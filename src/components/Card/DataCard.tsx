@@ -4,6 +4,7 @@ import moment from "moment";
 import {
   CardDescription,
   CardSource,
+  CardTitle,
   DataCardContent,
   DataCardHeader,
   DataCardImg,
@@ -36,7 +37,7 @@ const DataCard: FC<DataCardProps> = ({ data }) => {
             ))}
           </TagList>
         </DataCardHeader>
-        <h3>{data.title}</h3>
+        <CardTitle>{data.title}</CardTitle>
         <CardSource>{data.source.name}</CardSource>
         <CardDescription>{data.description}</CardDescription>
         <div style={{ float: "right" }}>

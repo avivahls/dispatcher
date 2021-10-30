@@ -1,5 +1,6 @@
 import React, { FC, useCallback, useState } from "react";
 import {
+  DropdownSearch,
   InputStyle,
   SearchAndRecentContainer,
   SearchDivider,
@@ -20,8 +21,10 @@ const SearchElement: FC = () => {
       <SearchStyle>
         <SearchIcon src={Search} />
         <InputStyle onFocus={toggling}></InputStyle>
-        <SearchDivider />
-        <Dropdown title="Top Headlines" items={["1", "2"]}></Dropdown>
+        <DropdownSearch>
+          <SearchDivider />
+          <Dropdown title="Top Headlines" items={["1", "2"]}></Dropdown>
+        </DropdownSearch>
       </SearchStyle>
       {isInputClicked && (
         <RecentSearch items={["dsfsdf", "asdasd", "adasd"]}></RecentSearch>

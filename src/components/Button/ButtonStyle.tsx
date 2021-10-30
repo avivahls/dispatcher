@@ -19,6 +19,7 @@ export const Icon = styled.img`
   order: 1;
   flex-grow: 0;
   margin: 0px 8px;
+  width: 30px;
 `;
 
 export const PrimaryButton = styled(ButtonStyled)`
