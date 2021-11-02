@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import { BLUE, DARK_GREY } from "../../Colors";
+import { FlexRow, IPAD_SIZE, MOBILE_SIZE } from "../../Style/layouts";
 
-export const HeaderStyle = styled.div`
-  display: flex;
-  flex-direction: row;
+export const HeaderStyle = styled(FlexRow)`
   justify-content: space-between;
   background-color: ${DARK_GREY};
   width: 100%;
@@ -18,21 +17,25 @@ export const UserStyle = styled.div`
   justify-content: center;
   align-items: center;
   margin: auto 5px;
-  @media only screen and (max-width: 770px) {
+  cursor: pointer;
+  @media only screen and (max-width: ${IPAD_SIZE}) {
     width: 40px;
     height: 40px;
   }
-  @media only screen and (max-width: 550px) {
+  @media only screen and (max-width: ${MOBILE_SIZE}) {
     width: 30px;
     height: 30px;
   }
 `;
-export const IconsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
+export const IconsContainer = styled(FlexRow)`
   justify-content: end;
   color: white;
   float: right;
   margin: auto 5px;
-  /* width: 10%; */
+`;
+export const LogoContainer = styled.div`
+  width: 10%;
+`;
+export const SearchContainer = styled.div`
+  width: 80%;
 `;

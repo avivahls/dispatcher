@@ -1,19 +1,35 @@
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import { Icon } from "../Button/ButtonStyle";
 import { Dropdown } from "../Dropdown/Dropdown";
-import { FilterBarContainer, FilterBarSmallScreen } from "./FilterBarStyle";
+import {
+  CatergoryType,
+  FilterBarContainer,
+  FilterBarSmallScreen,
+  FilterProps,
+} from "./FilterBarStyle";
 import Filter from "../../assets/filter.svg";
+import DatePick from "../Date/DatePick";
+import { FilterOptions } from "../../Style/layouts";
 
-const FilterBar: FC = () => {
+const FilterBar: FC<FilterProps> = ({ type }) => {
+  const renderByCategory = useCallback((category) => {
+    return (
+      <>
+        {Object.keys(category).map((item, key) => {
+          return <Dropdown key={key} title={item} items={category[item]} />;
+        })}
+        {category === "topheadlines" ? <DatePick /> : ""}
+      </>
+    );
+  }, []);
   return (
     <>
       <FilterBarContainer>
-        <Dropdown title="Country" items={["1", "2"]}></Dropdown>
-        <Dropdown title="Category" items={["1", "2"]}></Dropdown>
-        <Dropdown title="Sources" items={["1", "2"]}></Dropdown>
+        {type === CatergoryType.everything
+          ? renderByCategory(FilterOptions.everything)
+          : renderByCategory(FilterOptions.topheadlines)}
       </FilterBarContainer>
       <FilterBarSmallScreen>
-        <Dropdown title="Sort By" items={["Date"]}></Dropdown>
         <Icon src={Filter} />
       </FilterBarSmallScreen>
     </>

@@ -1,24 +1,44 @@
 import React, { FC } from "react";
-import { BLUE } from "../../Colors";
 import { SmallLogo } from "../Logo/LogoStyle";
 import SearchElement from "../Search/SearchElement";
-import { HeaderStyle, IconsContainer, UserStyle } from "./HeaderStyle";
-import Notifications from "./notifications.svg";
-import Settings from "./settings.svg";
+import {
+  HeaderStyle,
+  IconsContainer,
+  LogoContainer,
+  SearchContainer,
+  UserStyle,
+} from "./HeaderStyle";
+import Notifications from "../../assets/notifications.svg";
+import Settings from "../../assets/settings.svg";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const HeaderElement: FC = () => {
+  const { logout } = useAuth0();
+  const { user } = useAuth0();
+
   return (
     <HeaderStyle>
-      <div style={{ width: "10%" }}>
+      <LogoContainer>
         <SmallLogo />
-      </div>
-      <div style={{ width: "80%" }}>
+      </LogoContainer>
+      <SearchContainer>
         <SearchElement />
-      </div>
+      </SearchContainer>
       <IconsContainer>
         <img src={Settings} alt="serch elememt"></img>
         <img src={Notifications} alt="serch elememt"></img>
-        <UserStyle>AB</UserStyle>
+        <UserStyle
+          onClick={() =>
+            logout({
+              returnTo: window.location.origin,
+            })
+          }
+        >
+          {user &&
+            String(user.name).charAt(0).toUpperCase() +
+              "" +
+              String(user.family_name).charAt(0).toUpperCase()}
+        </UserStyle>
       </IconsContainer>
     </HeaderStyle>
   );

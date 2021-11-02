@@ -5,6 +5,7 @@ import {
   CardDescription,
   CardSource,
   CardTitle,
+  DataButtonContainer,
   DataCardContent,
   DataCardHeader,
   DataCardImg,
@@ -40,12 +41,12 @@ const DataCard: FC<DataCardProps> = ({ data }) => {
         <CardTitle>{data.title}</CardTitle>
         <CardSource>{data.source.name}</CardSource>
         <CardDescription>{data.description}</CardDescription>
-        <div style={{ float: "right" }}>
-          <PrimaryButton>
+        <DataButtonContainer>
+          <PrimaryButton onClick={() => window.open(data.url, "_blank")}>
             NAVIGATE TO DISPATCH
             <Icon src={Arrow} />
           </PrimaryButton>
-        </div>
+        </DataButtonContainer>
       </DataCardContent>
     </DataCardStyle>
   );

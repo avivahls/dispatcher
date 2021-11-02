@@ -23,7 +23,10 @@ const SearchElement: FC = () => {
         <InputStyle onFocus={toggling}></InputStyle>
         <DropdownSearch>
           <SearchDivider />
-          <Dropdown title="Top Headlines" items={["1", "2"]}></Dropdown>
+          <Dropdown
+            title="category"
+            items={["everything", "topheadlines"]}
+          ></Dropdown>
         </DropdownSearch>
       </SearchStyle>
       {isInputClicked && (

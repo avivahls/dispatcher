@@ -1,11 +1,15 @@
 import styled from "styled-components";
-import { FlexCol, FlexRowCenter } from "../../Style/layouts";
+import {
+  FlexCol,
+  FlexRowCenter,
+  IPAD_SIZE,
+  MOBILE_SIZE,
+} from "../../Style/layouts";
 
 export const SearchAndRecentContainer = styled(FlexCol)`
-  /* width: clamp(250px, 45vw, 600px); */
   width: fit-content;
   padding: 0px;
-  @media only screen and (max-width: 500px) {
+  @media only screen and (max-width: ${MOBILE_SIZE}) {
     display: none;
   }
 `;
@@ -15,7 +19,6 @@ export const SearchStyle = styled(FlexRowCenter)`
   height: 45px;
   padding: 0;
   margin: 10px 0px;
-  /* width: fit-content; */
 `;
 export const InputStyle = styled.input.attrs({
   type: "text",
@@ -44,7 +47,7 @@ export const SearchDivider = styled.div`
   width: 1px;
 `;
 export const DropdownSearch = styled(FlexRowCenter)`
-  @media only screen and (max-width: 770px) {
+  @media only screen and (max-width: ${IPAD_SIZE}) {
     display: none;
   }
 `;

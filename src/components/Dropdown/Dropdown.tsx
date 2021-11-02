@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useCallback } from "react";
 import DownIcon from "../../assets/dropdown.svg";
+
 import {
   DropdownContainer,
   DropdownHeader,
   DropdownItem,
   DropdownList,
+  DropdownListContainer,
 } from "./DropdownStyle";
 
 export interface DropdownProps {
@@ -32,7 +34,7 @@ export const Dropdown = ({ title, items }: DropdownProps) => {
         <img src={DownIcon} alt="down icon of dropdown"></img>
       </DropdownHeader>
       {isOpen && (
-        <div style={{ position: "relative" }}>
+        <DropdownListContainer>
           <DropdownList>
             {items.map((item) => (
               <DropdownItem
@@ -43,7 +45,7 @@ export const Dropdown = ({ title, items }: DropdownProps) => {
               </DropdownItem>
             ))}
           </DropdownList>
-        </div>
+        </DropdownListContainer>
       )}
     </DropdownContainer>
   );

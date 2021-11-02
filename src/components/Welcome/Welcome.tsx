@@ -11,8 +11,11 @@ import {
   WelcomeTitle,
 } from "./WelcomeStyle";
 import Arrow from "../../assets/Arrow - Right.svg";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Welcome: FC = () => {
+  const { loginWithRedirect } = useAuth0();
+
   return (
     <WelcomeContainer>
       <WelcomeLogo>
@@ -26,7 +29,14 @@ const Welcome: FC = () => {
             blogs across the web
           </WelcomeText>
           <WelcomeDivider />
-          <WelcomeButton>
+          <WelcomeButton
+            onClick={() =>
+              loginWithRedirect({
+                display: "popup",
+                redirectUri: "http://localhost:3000/home",
+              })
+            }
+          >
             CONTINUE
             <Icon src={Arrow} />
           </WelcomeButton>
