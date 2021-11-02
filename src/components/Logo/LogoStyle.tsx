@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import logo from "../../assets/LOGO.svg";
-import { IPAD_SIZE } from "../../Style/layouts";
+import { IPAD_SIZE } from "../../style/layouts";
 
 export const LogoStyle = styled.img.attrs({ src: logo })`
   display: flex;

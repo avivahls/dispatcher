@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BORDER_COLOR, GREY, LIGHT_GREY_2, SHADOW } from "../../Colors";
+import { BORDER_COLOR, GREY, LIGHT_GREY_2, SHADOW } from "../../style/Colors";
 import { PrimaryButton } from "../Button/ButtonStyle";
 
 export const FormStyle = styled.form`

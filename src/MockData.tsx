@@ -1,4 +1,4 @@
-import { BLUE, CHART_COLORS, LINE_BACKGROUND } from "./Colors";
+import { BLUE, CHART_COLORS, LINE_BACKGROUND } from "./style/Colors";
 import { IData } from "./components/Card/CardStyle";
 import { IChartData } from "./components/Chart/ChartType";
 

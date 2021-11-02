@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { DARK_GREY, GREY, LIGHT_GREY_4 } from "../../Colors";
-import { FlexColCenter, FlexRow, IPAD_SIZE } from "../../Style/layouts";
+import { DARK_GREY, GREY, LIGHT_GREY_4 } from "../../style/Colors";
+import { FlexColCenter, FlexRow, IPAD_SIZE } from "../../style/layouts";
 
 export const WelcomeContainer = styled(FlexRow)`
   height: 100vh;

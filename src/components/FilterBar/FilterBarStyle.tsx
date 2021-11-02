@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { BORDER_COLOR, DROPDOWN_HOVER } from "../../Colors";
-import { FlexRow, IPAD_SIZE } from "../../Style/layouts";
+import { BORDER_COLOR, DROPDOWN_HOVER } from "../../style/Colors";
+import { FlexRow, IPAD_SIZE } from "../../style/layouts";
 import "./../../index.css";
 
 export const FilterBarContainer = styled(FlexRow)`

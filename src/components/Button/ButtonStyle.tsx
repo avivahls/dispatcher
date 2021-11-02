@@ -1,5 +1,10 @@
 import styled from "styled-components";
-import { BLUE, GREY, LIGHT_GREY_2, TEXT_BTN_BACKGROUND } from "../../Colors";
+import {
+  BLUE,
+  GREY,
+  LIGHT_GREY_2,
+  TEXT_BTN_BACKGROUND,
+} from "../../style/Colors";
 
 export const ButtonStyled = styled.button`
   display: flex;

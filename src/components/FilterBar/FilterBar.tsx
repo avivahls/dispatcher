@@ -9,7 +9,7 @@ import {
 } from "./FilterBarStyle";
 import Filter from "../../assets/filter.svg";
 import DatePick from "../Date/DatePick";
-import { FilterOptions } from "../../Style/layouts";
+import { FilterOptions } from "../../style/layouts";
 
 const FilterBar: FC<FilterProps> = ({ type }) => {
   const renderByCategory = useCallback((category) => {

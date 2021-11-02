@@ -4,7 +4,7 @@ import {
   FlexRowCenter,
   IPAD_SIZE,
   MOBILE_SIZE,
-} from "../../Style/layouts";
+} from "../../style/layouts";
 
 export const SearchAndRecentContainer = styled(FlexCol)`
   width: fit-content;

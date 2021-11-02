@@ -4,7 +4,7 @@ import { SideBarFilter } from "../Dropdown/SideBarFilter";
 import { OtherSide, SideBarContainer, SideBarIcon } from "./SideBarStyle";
 // import DatePick from "../Date/DatePick";
 import { CatergoryType, SideBarFilterStyle } from "../FilterBar/FilterBarStyle";
-import { FilterOptions } from "../../Style/layouts";
+import { FilterOptions } from "../../style/layouts";
 import Back from "../../assets/back.svg";
 
 export interface SideBarProps {

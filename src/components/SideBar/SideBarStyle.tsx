@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { FlexCol } from "../../Style/layouts";
+import { FlexCol } from "../../style/layouts";
 
 export const SideBarContainer = styled(FlexCol)<{ isShown: boolean }>`
   display: flex;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { BORDER_COLOR, DROPDOWN_HOVER, GREY, SHADOW } from "../../Colors";
-import { FlexCol, FlexRow } from "../../Style/layouts";
+import { BORDER_COLOR, DROPDOWN_HOVER, GREY, SHADOW } from "../../style/Colors";
+import { FlexCol, FlexRow } from "../../style/layouts";
 import "./../../index.css";
 
 export const DropdownContainer = styled(FlexCol)`

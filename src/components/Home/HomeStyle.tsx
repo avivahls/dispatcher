@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FlexRow, IPAD_SIZE } from "../../Style/layouts";
+import { FlexRow, IPAD_SIZE } from "../../style/layouts";
 
 export const Dashboard = styled(FlexRow)`
   position: relative;

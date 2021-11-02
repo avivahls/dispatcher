@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import NotFound from "../../assets/not-found.svg";
 import Chart from "../../assets/chart.svg";
-import { FlexColCenter } from "../../Style/layouts";
+import { FlexColCenter } from "../../style/layouts";
 
 export const NoDataContainer = styled(FlexColCenter)`
   margin: auto;
