@@ -1,6 +1,7 @@
 import { ChartData } from "chart.js";
 import React, { FC, useCallback } from "react";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
+import { NoChartStyle, NoDataContainer } from "../NoData/NoDataStyle";
 import { ChartType, IChartData } from "./ChartType";
 
 export interface ChartProps {
@@ -40,6 +41,18 @@ const BasicChart: FC<ChartProps> = ({ chartType, state, options }) => {
     },
     []
   );
-  return <> {renderChart({ chartType, state, options })}</>;
+  return (
+    <>
+      {" "}
+      {state.labels.length !== 0 ? (
+        renderChart({ chartType, state, options })
+      ) : (
+        <NoDataContainer>
+          <NoChartStyle />
+          <p>No data to display</p>
+        </NoDataContainer>
+      )}
+    </>
+  );
 };
 export default BasicChart;

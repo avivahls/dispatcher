@@ -1,16 +1,19 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
+import { useCallback } from "react";
 import DownIcon from "../../assets/dropdown.svg";
+
 import {
   DropdownContainer,
   DropdownHeader,
   DropdownItem,
   DropdownList,
+  DropdownListContainer,
 } from "./DropdownStyle";
 
 export interface DropdownProps {
   title: string;
   items: string[];
-  onOptionClicked: (item: string) => void;
+  onOptionClicked?: (item: string) => void;
 }
 export const Dropdown = ({ title, items }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,16 +34,18 @@ export const Dropdown = ({ title, items }: DropdownProps) => {
         <img src={DownIcon} alt="down icon of dropdown"></img>
       </DropdownHeader>
       {isOpen && (
-        <DropdownList>
-          {items.map((item) => (
-            <DropdownItem
-              onClick={() => onOptionClicked(item)}
-              key={Math.random()}
-            >
-              {item}
-            </DropdownItem>
-          ))}
-        </DropdownList>
+        <DropdownListContainer>
+          <DropdownList>
+            {items.map((item) => (
+              <DropdownItem
+                onClick={() => onOptionClicked(item)}
+                key={Math.random()}
+              >
+                {item}
+              </DropdownItem>
+            ))}
+          </DropdownList>
+        </DropdownListContainer>
       )}
     </DropdownContainer>
   );

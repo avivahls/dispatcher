@@ -1,9 +1,12 @@
 import React, { FC, useCallback } from "react";
 import { Icon, PrimaryButton } from "../Button/ButtonStyle";
+import noImage from "../../assets/noImage.png";
 import moment from "moment";
 import {
   CardDescription,
   CardSource,
+  CardTitle,
+  DataButtonContainer,
   DataCardContent,
   DataCardHeader,
   DataCardImg,
@@ -12,6 +15,7 @@ import {
   TagList,
 } from "./CardStyle";
 import Arrow from "../../assets/Arrow - Right.svg";
+
 import { TagStyle } from "../Tag/TagStyle";
 
 export interface DataCardProps {
@@ -26,7 +30,12 @@ const DataCard: FC<DataCardProps> = ({ data }) => {
 
   return (
     <DataCardStyle>
-      <DataCardImg src={data.urlToImage} alt=" of news"></DataCardImg>
+      {data.urlToImage ? (
+        <DataCardImg src={data.urlToImage} alt=" of news"></DataCardImg>
+      ) : (
+        <img src={noImage} alt="no image icon to display" />
+      )}
+
       <DataCardContent>
         <DataCardHeader>
           {formatDate(data.publishedAt)}
@@ -36,15 +45,15 @@ const DataCard: FC<DataCardProps> = ({ data }) => {
             ))}
           </TagList>
         </DataCardHeader>
-        <h3>{data.title}</h3>
+        <CardTitle>{data.title}</CardTitle>
         <CardSource>{data.source.name}</CardSource>
         <CardDescription>{data.description}</CardDescription>
-        <div style={{ float: "right" }}>
-          <PrimaryButton>
+        <DataButtonContainer>
+          <PrimaryButton onClick={() => window.open(data.url, "_blank")}>
             NAVIGATE TO DISPATCH
             <Icon src={Arrow} />
           </PrimaryButton>
-        </div>
+        </DataButtonContainer>
       </DataCardContent>
     </DataCardStyle>
   );

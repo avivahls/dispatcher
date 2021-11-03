@@ -5,15 +5,6 @@ export const enum ChartType {
 }
 export type IChartData = ILineData | IDoughnutData | IBarData;
 
-// export interface ChartTemp {
-//   labels: string[],
-//   datasets: [
-//     {
-//       label: string,
-//       data: number[],
-//       borderColor?: string,
-//     }]
-// }
 type ILineData = {
   labels: string[];
   datasets: [

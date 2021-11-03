@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { GREY, LIGHT_GREY_3 } from "../../Colors";
+import { GREY, LIGHT_GREY_3 } from "../../style/Colors";
 import "./../../index.css";
 
 export const TagStyle = styled.p`

@@ -1,5 +1,10 @@
 import styled from "styled-components";
-import { BLUE, GREY, LIGHT_GREY_2, TEXT_BTN_BACKGROUND } from "../../Colors";
+import {
+  BLUE,
+  GREY,
+  LIGHT_GREY_2,
+  TEXT_BTN_BACKGROUND,
+} from "../../style/Colors";
 
 export const ButtonStyled = styled.button`
   display: flex;
@@ -12,6 +17,7 @@ export const ButtonStyled = styled.button`
   font-weight: 500;
   font-size: 14px;
   line-height: 26px;
+  cursor: pointer;
 `;
 
 export const Icon = styled.img`
@@ -19,6 +25,7 @@ export const Icon = styled.img`
   order: 1;
   flex-grow: 0;
   margin: 0px 8px;
+  width: 30px;
 `;
 
 export const PrimaryButton = styled(ButtonStyled)`
@@ -32,7 +39,7 @@ export const PrimaryButton = styled(ButtonStyled)`
 
 export const WelcomeButton = styled(ButtonStyled)`
   color: white;
-  width: 90%;
+  width: 100%;
   background: ${BLUE};
   border-radius: 10px;
   &:hover {

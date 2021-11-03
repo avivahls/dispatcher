@@ -1,8 +1,7 @@
-import { BLUE, CHART_COLORS, LINE_BACKGROUND } from "./Colors";
+import { BLUE, CHART_COLORS, LINE_BACKGROUND } from "./style/Colors";
 import { IData } from "./components/Card/CardStyle";
 import { IChartData } from "./components/Chart/ChartType";
 
-///DUMMY DATA options
 export const LineChartOptions = {
   tension: 1,
   fill: {
@@ -24,7 +23,6 @@ export const DoughnutChartOptions = {
   maintainAspectRatio: false,
 };
 
-//////DUMMY DATA chartData
 export const LineChartState: IChartData = {
   labels: ["January", "February", "March", "April", "May"],
   datasets: [

@@ -1,31 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./App.css";
-import { Dashboard } from "./components/CardList/CardListStyle";
-import axios from "axios";
-import ChartCardList from "./components/CardList/ChartCardList";
-import DataCardList from "./components/CardList/DataCardList";
+import Welcome from "./components/Welcome/Welcome";
+import Home from "./components/Home/Home";
+import { Route, Switch } from "react-router-dom";
+import ProtectedRoute from "./auth/protected-route";
+import { Provider } from "react-redux";
+import store from "./store";
 
 function App() {
-  const [articles, setArticles] = useState([]);
-  async function getData() {
-    try {
-      const response = await axios.get<any>("everything.json");
-      const arWithTags = response.data.articles.map((article: {}) => {
-        return { ...article, tags: ["one", "two", "three"] };
-      });
-      setArticles(arWithTags);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-  useEffect(() => {
-    getData();
-  }, []);
   return (
-    <Dashboard>
-      <DataCardList news={articles} />
-      <ChartCardList></ChartCardList>
-    </Dashboard>
+    <>
+      <Provider store={store}>
+        <Switch>
+          <Route path="/" exact component={Welcome} />
+          <ProtectedRoute path="/home" component={Home} />
+        </Switch>
+      </Provider>
+    </>
   );
 }
 
