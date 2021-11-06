@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { FlexCol } from "../../style/layouts";
+import { FlexCol, MOBILE_SIZE } from "../../style/layouts";
 
 export const SideBarContainer = styled(FlexCol)<{ isShown: boolean }>`
   display: flex;
@@ -22,6 +22,9 @@ export const SideBarContainer = styled(FlexCol)<{ isShown: boolean }>`
           box-shadow: -0.125rem 0 1.25rem 0 #343851;
         `
       : ``};
+  @media only screen and (max-width: ${MOBILE_SIZE}) {
+    width: 80%;
+  }
 `;
 export const OtherSide = styled.div<{ isShown: boolean }>`
   display: none;
@@ -45,9 +48,13 @@ export const OtherSide = styled.div<{ isShown: boolean }>`
           display: flex;
         `
       : ``};
+  @media only screen and (max-width: ${MOBILE_SIZE}) {
+    width: 20%;
+  }
 `;
 export const SideBarIcon = styled.img`
-  align-self: flex-start;
+  cursor: pointer;
+  align-self: center;
   margin: 0px 8px;
   width: 30px;
   float: left;

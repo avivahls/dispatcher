@@ -9,9 +9,12 @@ import {
 } from "./FilterBarStyle";
 import Filter from "../../assets/filter.svg";
 import DatePick from "../Date/DatePick";
-import { FilterOptions } from "../../style/layouts";
+import { useDispatch, useSelector } from "react-redux";
+import { newsActions } from "../../store/news-slice";
 
 const FilterBar: FC<FilterProps> = ({ type }) => {
+  const filtersOptions = useSelector((state: any) => state.news.filters);
+  const dispatch = useDispatch();
   const renderByCategory = useCallback((category) => {
     return (
       <>
@@ -26,11 +29,11 @@ const FilterBar: FC<FilterProps> = ({ type }) => {
     <>
       <FilterBarContainer>
         {type === CatergoryType.everything
-          ? renderByCategory(FilterOptions.everything)
-          : renderByCategory(FilterOptions.topheadlines)}
+          ? renderByCategory(filtersOptions.everything)
+          : renderByCategory(filtersOptions.topheadlines)}
       </FilterBarContainer>
       <FilterBarSmallScreen>
-        <Icon src={Filter} />
+        <Icon src={Filter} onClick={() => dispatch(newsActions.changeShow())} />
       </FilterBarSmallScreen>
     </>
   );

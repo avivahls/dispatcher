@@ -17,6 +17,9 @@ export const DataCardListStyle = styled(CardList)`
     width: 100%;
   }
 `;
+export const NoDataListStyle = styled(DataCardListStyle)`
+  width: 100%;
+`;
 export const ChartCardListStyle = styled(CardList)`
   width: fit-content;
   overflow: visible;

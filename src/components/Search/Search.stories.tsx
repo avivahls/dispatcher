@@ -7,3 +7,6 @@ export default {
 
 const Template: Story = (args) => <SearchElement {...args} />;
 export const headerSearch = Template.bind({});
+
+// const Template1: Story = (args) => <SmallSearch {...args} />;
+// export const SmaSearch = Template1.bind({});

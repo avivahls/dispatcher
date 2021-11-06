@@ -5,6 +5,7 @@ import {
   LIGHT_GREY_2,
   TEXT_BTN_BACKGROUND,
 } from "../../style/Colors";
+import { MOBILE_SIZE } from "../../style/layouts";
 
 export const ButtonStyled = styled.button`
   display: flex;
@@ -27,6 +28,16 @@ export const Icon = styled.img`
   margin: 0px 8px;
   width: 30px;
 `;
+export const SmallIcon = styled(Icon)`
+  width: 15px;
+`;
+export const SmallSearchIcon = styled.img`
+  display: none;
+  cursor: pointer;
+  @media only screen and (max-width: ${MOBILE_SIZE}) {
+    display: flex;
+  }
+`;
 
 export const PrimaryButton = styled(ButtonStyled)`
   color: white;
@@ -35,6 +46,11 @@ export const PrimaryButton = styled(ButtonStyled)`
   &:hover {
     opacity: 0.8;
   }
+`;
+export const SideBarButton = styled(PrimaryButton)`
+  width: 50%;
+  align-self: center;
+  bottom: 0px;
 `;
 
 export const WelcomeButton = styled(ButtonStyled)`
@@ -61,4 +77,8 @@ export const TextButton = styled(ButtonStyled)`
     background: ${TEXT_BTN_BACKGROUND};
     border-radius: 20px;
   }
+`;
+export const RecentSearchSmallButton = styled(TextButton)`
+  background: ${LIGHT_GREY_2};
+  font-weight: bold;
 `;

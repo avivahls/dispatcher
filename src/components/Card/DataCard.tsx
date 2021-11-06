@@ -33,7 +33,7 @@ const DataCard: FC<DataCardProps> = ({ data }) => {
       {data.urlToImage ? (
         <DataCardImg src={data.urlToImage} alt=" of news"></DataCardImg>
       ) : (
-        <img src={noImage} alt="no image icon to display" />
+        <img src={noImage} alt="handele empty" />
       )}
 
       <DataCardContent>

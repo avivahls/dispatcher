@@ -36,11 +36,12 @@ export const SideBarFilterStyle = styled(FlexRow)`
   &:hover {
     background: ${DROPDOWN_HOVER};
   }
+  cursor: pointer;
 `;
 
 export enum CatergoryType {
-  everything,
-  topHeadlines,
+  everything = "everything",
+  topheadlines = "topheadlines",
 }
 export enum SubCategoryType {
   sources,

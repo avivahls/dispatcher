@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import {
   DropdownSearch,
   InputStyle,
@@ -8,29 +8,53 @@ import {
   SearchStyle,
 } from "./SearchStyle";
 import Search from "../../assets/search.svg";
-import { Dropdown } from "../Dropdown/Dropdown";
 import RecentSearch from "../RecentSearch/RecentSearch";
+import { CategoryDropdown } from "../Dropdown/CategoryDropdown";
+import useDebounce from "../../hooks/useDebounce";
+import { useDispatch } from "react-redux";
+import { newsActions } from "../../store/news-slice";
+import { getApi } from "../../store/news-actions";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 const SearchElement: FC = () => {
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const debouncedSearchTerm = useDebounce<string>(searchTerm, 500);
+  const dispatch = useDispatch();
   const [isInputClicked, setIsInputClick] = useState(false);
+  // const [recentSearchs, setrecentSearchs] = useLocalStorage<string[]>(
+  //   "recent",
+  //   []
+  // );
+
+  useEffect(() => {
+    dispatch(newsActions.changeSearchValue(debouncedSearchTerm));
+    // setrecentSearchs(() => {
+    //   recentSearchs.push(debouncedSearchTerm);
+    //   return recentSearchs;
+    // });
+    dispatch(getApi(false));
+  }, [debouncedSearchTerm, dispatch]);
   const toggling = useCallback(() => {
     setIsInputClick((prevIsOpen) => !prevIsOpen);
   }, []);
+
   return (
     <SearchAndRecentContainer>
       <SearchStyle>
         <SearchIcon src={Search} />
-        <InputStyle onFocus={toggling}></InputStyle>
+        <InputStyle
+          onFocus={toggling}
+          onChange={(e: React.FormEvent<HTMLInputElement>) =>
+            setSearchTerm((e.target as HTMLInputElement).value)
+          }
+        ></InputStyle>
         <DropdownSearch>
           <SearchDivider />
-          <Dropdown
-            title="category"
-            items={["everything", "topheadlines"]}
-          ></Dropdown>
+          <CategoryDropdown />
         </DropdownSearch>
       </SearchStyle>
       {isInputClicked && (
-        <RecentSearch items={["dsfsdf", "asdasd", "adasd"]}></RecentSearch>
+        <RecentSearch items={["recentSearchs"]}></RecentSearch>
       )}
     </SearchAndRecentContainer>
   );

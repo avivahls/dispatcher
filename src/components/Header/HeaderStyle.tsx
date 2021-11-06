@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import { BLUE, DARK_GREY } from "../../style/Colors";
-import { FlexRow, IPAD_SIZE, MOBILE_SIZE } from "../../style/layouts";
+import {
+  FlexRow,
+  FlexRowCenter,
+  IPAD_SIZE,
+  MOBILE_SIZE,
+} from "../../style/layouts";
 
 export const HeaderStyle = styled(FlexRow)`
   justify-content: space-between;
@@ -8,13 +13,11 @@ export const HeaderStyle = styled(FlexRow)`
   width: 100%;
   height: 65px;
 `;
-export const UserStyle = styled.div`
-  display: flex;
+export const UserStyle = styled(FlexRowCenter)`
   background-color: ${BLUE};
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  justify-content: center;
   align-items: center;
   margin: auto 5px;
   cursor: pointer;
@@ -29,6 +32,7 @@ export const UserStyle = styled.div`
 `;
 export const IconsContainer = styled(FlexRow)`
   justify-content: end;
+  align-items: center;
   color: white;
   float: right;
   margin: auto 5px;

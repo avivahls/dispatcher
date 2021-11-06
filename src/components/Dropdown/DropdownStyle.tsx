@@ -45,8 +45,9 @@ export const SideDropdownHeader = styled(FlexRow)`
 export const DropdownList = styled.ul`
   padding: 0;
   margin-top: 10px;
-  margin-bottom: 0;
+  margin-bottom: 0px;
   padding-top: 10px;
+  padding-bottom: 0px;
   box-sizing: border-box;
   font-size: 20.8px;
   background: white;
@@ -68,6 +69,10 @@ export const DropdownList = styled.ul`
   &:first-child {
     padding-top: 0.8em;
   }
+  cursor: pointer;
+`;
+export const DropdownListLogout = styled(DropdownList)`
+  height: fit-content;
 `;
 export const SideDropdownsList = styled.ul`
   padding: 0;
@@ -75,7 +80,6 @@ export const SideDropdownsList = styled.ul`
   box-sizing: border-box;
   font-size: 20.8px;
   background: white;
-  cursor: pointer;
   position: relative;
   list-style-type: none;
   z-index: 2;
@@ -90,6 +94,7 @@ export const SideDropdownsList = styled.ul`
   &:first-child {
     padding-top: 0.8em;
   }
+  cursor: pointer;
 `;
 export const DropdownItem = styled.li`
   padding: 5px 15px;
@@ -100,6 +105,7 @@ export const DropdownItem = styled.li`
   &:hover {
     background: ${DROPDOWN_HOVER};
   }
+  cursor: pointer;
 `;
 export const SideDropdownItem = styled.li`
   padding: 5px;
@@ -108,7 +114,9 @@ export const SideDropdownItem = styled.li`
   color: ${GREY};
   background-color: white;
   border-top: 1px solid ${BORDER_COLOR};
+
   &:hover {
     background: ${DROPDOWN_HOVER};
   }
+  cursor: pointer;
 `;
