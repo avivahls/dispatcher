@@ -53,7 +53,6 @@ export enum SubCategoryType {
 }
 export interface FilterProps {
   type: CatergoryType;
-  //filters: Filters;
 }
 export type Filters = {
   [CatergoryType: string]: {

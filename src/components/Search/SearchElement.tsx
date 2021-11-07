@@ -14,24 +14,15 @@ import useDebounce from "../../hooks/useDebounce";
 import { useDispatch } from "react-redux";
 import { newsActions } from "../../store/news-slice";
 import { getApi } from "../../store/news-actions";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 const SearchElement: FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const debouncedSearchTerm = useDebounce<string>(searchTerm, 500);
   const dispatch = useDispatch();
   const [isInputClicked, setIsInputClick] = useState(false);
-  // const [recentSearchs, setrecentSearchs] = useLocalStorage<string[]>(
-  //   "recent",
-  //   []
-  // );
 
   useEffect(() => {
     dispatch(newsActions.changeSearchValue(debouncedSearchTerm));
-    // setrecentSearchs(() => {
-    //   recentSearchs.push(debouncedSearchTerm);
-    //   return recentSearchs;
-    // });
     dispatch(getApi(false));
   }, [debouncedSearchTerm, dispatch]);
   const toggling = useCallback(() => {
