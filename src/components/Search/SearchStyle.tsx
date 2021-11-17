@@ -15,7 +15,7 @@ export const SearchAndRecentContainer = styled(FlexCol)`
 `;
 export const SearchAndRecentSmall = styled(FlexCol)`
   position: absolute;
-  z-index: 100;
+  z-index: 10;
   width: 100vw;
   height: 100vh;
   padding: 0px;
@@ -28,9 +28,10 @@ export const SearchStyle = styled(FlexRowCenter)`
   margin: 10px 0px;
 `;
 export const SmallSearchStyle = styled(FlexRowCenter)`
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   background-color: white;
+  width: 100%;
   height: 45px;
   padding: 10px;
   margin: 0px;

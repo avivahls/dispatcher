@@ -4,10 +4,12 @@ import { FilterOptions, selectedFilters } from "../style/layouts";
 
 export interface NewsGlobalState {
   news: {
+    isLoading: boolean;
     category: CatergoryType;
     searchValue: string;
     filters: Filters;
     selectedFilters: Filters;
+    datesFilters: Date[];
     data: [];
     ShowSideBar: boolean;
   };
@@ -15,14 +17,19 @@ export interface NewsGlobalState {
 const newsSlice = createSlice({
   name: "news",
   initialState: {
+    isLoading: false,
     category: CatergoryType.topheadlines,
     searchValue: "",
     filters: FilterOptions,
     selectedFilters: selectedFilters,
+    datesFilters: [new Date(), null],
     data: [],
     ShowSideBar: false,
   },
   reducers: {
+    changeLoading(state, action) {
+      state.isLoading = action.payload;
+    },
     getNews(state, action) {
       state.data = action.payload;
     },
@@ -41,6 +48,11 @@ const newsSlice = createSlice({
     changeShow(state) {
       state.ShowSideBar = !state.ShowSideBar;
     },
+    addDatesFilter(state, action) {
+      const startDate = action.payload.from;
+      const endDate = action.payload.to;
+      state.datesFilters = [startDate, endDate];
+    },
     addOptions(state, action) {
       const subCategory = action.payload.category;
       const value = action.payload.value;
@@ -51,9 +63,6 @@ const newsSlice = createSlice({
           break;
         case "language":
           state.selectedFilters.everything.language[0] = value;
-          break;
-        case "dates":
-          state.selectedFilters.everything.dates[0] = value;
           break;
         case "country":
           state.selectedFilters.topheadlines.country[0] = value;

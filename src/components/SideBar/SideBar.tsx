@@ -2,22 +2,40 @@ import React, { FC, useCallback, useState } from "react";
 import { DropdownBoldHeader } from "../Dropdown/DropdownStyle";
 import { SideBarFilter } from "../Dropdown/SideBarFilter";
 import { OtherSide, SideBarContainer, SideBarIcon } from "./SideBarStyle";
-// import DatePick from "../Date/DatePick";
 import { SideBarFilterStyle } from "../FilterBar/FilterBarStyle";
 import Back from "../../assets/back.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { newsActions, NewsGlobalState } from "../../store/news-slice";
 import { SideBarButton } from "../Button/ButtonStyle";
 import { getApi } from "../../store/news-actions";
+import DatePicker from "react-datepicker";
+import moment from "moment";
 
 export interface SideBarProps {
   isShown: boolean;
   type: string;
 }
 const SideBar: FC<SideBarProps> = ({ isShown, type }) => {
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState<Date>();
   const [filterState, setFilterState] = useState("filters");
   const [subCategory, setSubCategory] = useState("");
   const [isMainCategory, setIsMainCategory] = useState(false);
+  const onChange = (dates: any) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
+    dispatch(
+      newsActions.addDatesFilter({
+        from: moment(start).format("YYYY-MM-DD"),
+        to: moment(end).format("YYYY-MM-DD"),
+      })
+    );
+    if (end) {
+      dispatch(getApi(false, 1));
+      setFilterState("filters");
+    }
+  };
   const MainCategory = useSelector(
     (state: NewsGlobalState) => state.news.category
   );
@@ -43,10 +61,10 @@ const SideBar: FC<SideBarProps> = ({ isShown, type }) => {
     },
     [dispatch]
   );
-  const handleViewResults = useCallback(() => {
-    dispatch(getApi(false));
+  const handleViewResults = () => {
+    dispatch(getApi(false, 1));
     dispatch(newsActions.changeShow());
-  }, [dispatch]);
+  };
   const renderByCategory = useCallback(
     (category) => {
       return (
@@ -61,26 +79,44 @@ const SideBar: FC<SideBarProps> = ({ isShown, type }) => {
             }}
           />
           {Object.keys(category).map((item, key) => {
-            return (
-              <SideBarFilter
-                key={key}
-                title={item}
-                selected={
-                  selectedFilters[type][item]
-                    ? String(selectedFilters[type][item])
-                    : ""
-                }
-                onClickHandle={() => {
-                  setFilterState("options");
-                  setSubCategory(item);
-                }}
-              />
-            );
+            if (item !== "sortby") {
+              return (
+                <SideBarFilter
+                  key={key}
+                  title={item}
+                  selected={
+                    selectedFilters[type][item]
+                      ? String(selectedFilters[type][item])
+                      : ""
+                  }
+                  onClickHandle={() => {
+                    setFilterState("options");
+                    setSubCategory(item);
+                  }}
+                />
+              );
+            }
           })}
+          {category === filtersOptions.everything && (
+            <SideBarFilter
+              title="Date"
+              selected={
+                endDate
+                  ? `${moment(startDate).format("YY/MM/DD")}-${moment(
+                      endDate
+                    ).format("YY/MM/DD")}`
+                  : ``
+              }
+              onClickHandle={() => {
+                setFilterState("options");
+                setSubCategory("Date");
+              }}
+            />
+          )}
         </>
       );
     },
-    [type, selectedFilters, MainCategory]
+    [type, selectedFilters, MainCategory, filtersOptions, endDate, startDate]
   );
 
   return (
@@ -97,7 +133,7 @@ const SideBar: FC<SideBarProps> = ({ isShown, type }) => {
             </SideBarButton>
           </>
         )}
-        {filterState === "options" && (
+        {filterState === "options" && subCategory !== "Date" && (
           <>
             <DropdownBoldHeader>
               <SideBarIcon
@@ -116,6 +152,7 @@ const SideBar: FC<SideBarProps> = ({ isShown, type }) => {
                 </SideBarFilterStyle>
               ))}
             {!isMainCategory &&
+              subCategory !== "Date" &&
               filtersOptions[type][subCategory].map((item, key) => (
                 <SideBarFilterStyle
                   key={key}
@@ -124,6 +161,26 @@ const SideBar: FC<SideBarProps> = ({ isShown, type }) => {
                   {item}
                 </SideBarFilterStyle>
               ))}
+          </>
+        )}
+        {filterState === "options" && subCategory === "Date" && (
+          <>
+            <DropdownBoldHeader>
+              <SideBarIcon
+                src={Back}
+                onClick={() => setFilterState("filters")}
+              />
+              DATE
+            </DropdownBoldHeader>
+            <DatePicker
+              className="datePicker"
+              selected={startDate}
+              onChange={onChange}
+              startDate={startDate}
+              endDate={endDate}
+              selectsRange
+              inline
+            />{" "}
           </>
         )}
       </SideBarContainer>

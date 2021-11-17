@@ -1,6 +1,6 @@
 import { Meta, Story } from "@storybook/react";
 import { DUMMY, DUMMY2 } from "../../MockData";
-import ChartCardList from "./ChartCardList";
+import ChartCardList, { ChartCardListProps } from "./ChartCardList";
 import DataCardList, { DataCardListProps } from "./DataCardList";
 
 export default {
@@ -14,5 +14,10 @@ V1.args = {
   news: [DUMMY, DUMMY2, DUMMY, DUMMY2],
 };
 
-const Template1: Story = (args) => <ChartCardList {...args} />;
+const Template1: Story<ChartCardListProps> = (args) => (
+  <ChartCardList {...args} />
+);
 export const V2 = Template1.bind({});
+V2.args = {
+  news: [DUMMY, DUMMY2, DUMMY, DUMMY2],
+};

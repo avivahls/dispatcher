@@ -27,9 +27,12 @@ export const Icon = styled.img`
   flex-grow: 0;
   margin: 0px 8px;
   width: 30px;
+  height: 30px;
 `;
 export const SmallIcon = styled(Icon)`
   width: 15px;
+  height: 15px;
+  cursor: pointer;
 `;
 export const SmallSearchIcon = styled.img`
   display: none;

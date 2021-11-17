@@ -24,6 +24,10 @@ export const DashboardTitle = styled.div`
     width: 90%;
   }
 `;
+export const DashboardTitleTotal = styled.div`
+  width: 80%;
+  margin: 10px auto;
+`;
 export const DashboardDivider = styled.div`
   border: 1px solid #d9dbe9;
   width: 80%;

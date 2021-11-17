@@ -3,46 +3,48 @@ import { IData } from "../components/Card/CardStyle";
 import { newsActions } from "./news-slice";
 
 const URL = "https://newsapi.org/v2/";
-const API_KEY = "15a3d7a95cc648038f11955cbd5b5bf4";
+const API_KEY = process.env.REACT_APP_API_KEY;
 const pageSize = 10;
-const page = 1;
 
-export const buildTemp = (start: boolean, filters: any, state: any) => {
+export const buildUrl = (start: boolean, filters: any, state: any) => {
   let temp = "";
-  if (!start) {
-    Object.keys(filters[state.category]).forEach((item: string) => {
-      if (filters[state.category][item].length !== 0) {
-        if (temp === "") {
-          temp = `?${item}=${filters[state.category][item][0]}`;
-        } else {
-          temp = temp + `&${item}=${filters[state.category][item][0]}`;
+  start
+    ? (temp = "?country=us")
+    : Object.keys(filters[state.category]).forEach((item: string) => {
+        if (filters[state.category][item].length !== 0) {
+          const toBeAdded = `${item}=${filters[state.category][item][0]}`;
+          temp === ""
+            ? (temp = `?${toBeAdded}`)
+            : (temp = temp + `&${toBeAdded}`);
         }
-      }
-    });
-  } else {
-    temp = "?country=il";
-  }
+      });
   if (state.searchValue !== "") {
-    if (temp !== "") temp = temp + `&q=${state.searchValue}`;
-    else temp = `?q=${state.searchValue}`;
+    const toAdd = `q=${state.searchValue}`;
+    temp !== "" ? (temp = temp + `&${toAdd}`) : (temp = `?${toAdd}`);
+  }
+  if (state.datesFilters[1]) {
+    const toAdd = `from=${state.datesFilters[0]}&to=${state.datesFilters[1]}`;
+    temp !== "" ? (temp = temp + `&${toAdd}`) : (temp = `?${toAdd}`);
   }
   return temp;
 };
-export const getApi = (start: boolean) => {
+export const getApi = (start: boolean, pageNumber: number) => {
   return (dispatch: any, getState: any) => {
     let arWithTags: IData[] = [];
     const state = getState().news;
     const mainCategory =
       state.category === "everything" ? "everything" : "top-headlines";
     const filters = state.selectedFilters;
-    const temp = buildTemp(start, filters, state);
+    const temp = buildUrl(start, filters, state);
     const sendRequest = async () => {
       const response = await axios.get<any>(
-        `${URL}${mainCategory}${temp}&apiKey=${API_KEY}&pageSize=${pageSize}&page=${page}`
+        `${URL}${mainCategory}${temp}&apiKey=${API_KEY}&pageSize=${pageSize}&page=${pageNumber}`
       );
 
       if (response.status !== 200) {
         throw new Error("Could not fetch news");
+      } else {
+        dispatch(newsActions.changeLoading(false));
       }
       arWithTags = response.data.articles.map((article: {}) => {
         return { ...article, tags: ["one", "two", "three"] };

@@ -5,32 +5,29 @@ export const enum ChartType {
 }
 export type IChartData = ILineData | IDoughnutData | IBarData;
 
-type ILineData = {
+export type ILineData = {
   labels: string[];
   datasets: [
     {
-      label: string;
       data: number[];
       borderColor?: string;
       backgroundColor?: string;
     }
   ];
 };
-type IDoughnutData = {
+export type IDoughnutData = {
   labels: string[];
   datasets: [
     {
-      label: string;
       data: number[];
       backgroundColor?: string[];
     }
   ];
 };
-type IBarData = {
+export type IBarData = {
   labels: string[];
   datasets: [
     {
-      label: string;
       data: number[];
       backgroundColor?: string;
     }

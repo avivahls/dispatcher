@@ -15,16 +15,19 @@ import { newsActions } from "../../store/news-slice";
 const FilterBar: FC<FilterProps> = ({ type }) => {
   const filtersOptions = useSelector((state: any) => state.news.filters);
   const dispatch = useDispatch();
-  const renderByCategory = useCallback((category) => {
-    return (
-      <>
-        {Object.keys(category).map((item, key) => {
-          return <Dropdown key={key} title={item} items={category[item]} />;
-        })}
-        {category === "topheadlines" ? <DatePick /> : ""}
-      </>
-    );
-  }, []);
+  const renderByCategory = useCallback(
+    (category) => {
+      return (
+        <>
+          {Object.keys(category).map((item, key) => {
+            return <Dropdown key={key} title={item} items={category[item]} />;
+          })}
+          {category === filtersOptions.everything && <DatePick />}
+        </>
+      );
+    },
+    [filtersOptions]
+  );
   return (
     <>
       <FilterBarContainer>
@@ -32,7 +35,13 @@ const FilterBar: FC<FilterProps> = ({ type }) => {
           ? renderByCategory(filtersOptions.everything)
           : renderByCategory(filtersOptions.topheadlines)}
       </FilterBarContainer>
-      <FilterBarSmallScreen>
+      <FilterBarSmallScreen type={type}>
+        {type === CatergoryType.everything && (
+          <Dropdown
+            title="sortby"
+            items={filtersOptions.everything["sortby"]}
+          />
+        )}
         <Icon src={Filter} onClick={() => dispatch(newsActions.changeShow())} />
       </FilterBarSmallScreen>
     </>

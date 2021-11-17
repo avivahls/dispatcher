@@ -9,12 +9,22 @@ export const LineChartOptions = {
   },
   responsive: true,
   maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      display: false,
+    },
+  },
 };
 export const BarChartOptions = {
   indexAxis: "y",
   borderRadius: 100,
   responsive: true,
   maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      display: false,
+    },
+  },
 };
 export const DoughnutChartOptions = {
   cutout: "80%",
@@ -24,31 +34,28 @@ export const DoughnutChartOptions = {
 };
 
 export const LineChartState: IChartData = {
-  labels: ["January", "February", "March", "April", "May"],
+  labels: [],
   datasets: [
     {
-      label: "Rainfall",
       borderColor: BLUE,
       backgroundColor: LINE_BACKGROUND,
-      data: [65, 59, 80, 81, 56],
+      data: [],
     },
   ],
 };
 export const DoughnutChartState: IChartData = {
-  labels: ["January", "February", "March", "April", "May"],
+  labels: [],
   datasets: [
     {
-      label: "Rainfall",
       backgroundColor: CHART_COLORS,
-      data: [65, 59, 80, 81, 56],
+      data: [],
     },
   ],
 };
 export const BarChartState: IChartData = {
-  labels: ["January", "February", "March", "April", "May"],
+  labels: ["#covid19", "sport", "israel", "Economy", "Crime"],
   datasets: [
     {
-      label: "Rainfall",
       backgroundColor: BLUE,
       data: [65, 59, 80, 81, 56],
     },

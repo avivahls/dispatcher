@@ -26,19 +26,16 @@ export const CategoryDropdown = () => {
   );
   const dispatch = useDispatch();
 
-  const onOptionClicked = useCallback(
-    (value: string) => {
-      setSelectedOption(value);
-      setIsOpen(false);
-      const category =
-        value === "everything"
-          ? CatergoryType.everything
-          : CatergoryType.topheadlines;
-      dispatch(newsActions.changeCategory(category));
-      dispatch(getApi(false));
-    },
-    [dispatch]
-  );
+  const onOptionClicked = (value: string) => {
+    setSelectedOption(value);
+    setIsOpen(false);
+    const category =
+      value === "everything"
+        ? CatergoryType.everything
+        : CatergoryType.topheadlines;
+    dispatch(newsActions.changeCategory(category));
+    dispatch(getApi(false, 1));
+  };
   const toggling = useCallback(() => {
     setIsOpen((prevIsOpen) => !prevIsOpen);
   }, []);

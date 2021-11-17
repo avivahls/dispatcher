@@ -25,6 +25,18 @@ export const SideBarContainer = styled(FlexCol)<{ isShown: boolean }>`
   @media only screen and (max-width: ${MOBILE_SIZE}) {
     width: 80%;
   }
+  .react-datepicker {
+    width: 100%;
+    position: relative;
+    z-index: 20 !important;
+    color: red;
+  }
+  .react-datepicker__month-container {
+    width: 100%;
+  }
+  .react-datepicker__day {
+    padding: 5px;
+  }
 `;
 export const OtherSide = styled.div<{ isShown: boolean }>`
   display: none;

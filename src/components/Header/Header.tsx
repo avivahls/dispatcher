@@ -20,64 +20,77 @@ import {
 } from "../Dropdown/DropdownStyle";
 import { SmallSearchIcon } from "../Button/ButtonStyle";
 import SmallSearch from "../Search/SmallSearch";
+import { getApi } from "../../store/news-actions";
+import { useDispatch } from "react-redux";
 
 const HeaderElement: FC = () => {
   const [isLogoutOpen, setIsLogoutOpen] = useState(false);
   const [isSmallSearchClicked, setIsSmallSearch] = useState(false);
   const { logout } = useAuth0();
   const { user } = useAuth0();
+  const dispatch = useDispatch();
   const toggling = useCallback(() => {
     setIsLogoutOpen((prevIsOpen) => !prevIsOpen);
   }, []);
-  const handleSmallSrean = () => {
+  const handleSmallScrean = () => {
     setIsSmallSearch((prev) => !prev);
+  };
+  const handleViewResults = () => {
+    dispatch(getApi(false, 1));
+    setIsSmallSearch((prev) => {
+      return !prev;
+    });
   };
 
   return (
     <>
-      {isSmallSearchClicked && <SmallSearch onBackClick={handleSmallSrean} />}
-      {!isSmallSearchClicked && (
-        <HeaderStyle>
-          <LogoContainer>
-            <SmallLogo />
-          </LogoContainer>
-          <SearchContainer>
-            <SearchElement />
-          </SearchContainer>
-          <DropdownContainer>
-            <IconsContainer>
-              <SmallSearchIcon
-                onClick={handleSmallSrean}
-                src={Search}
-                alt="serch elememt"
-              />
-              <img src={Settings} alt="serch elememt"></img>
-              <img src={Notifications} alt="serch elememt"></img>
-              <UserStyle onClick={toggling}>
-                {user &&
-                  String(user.name).charAt(0).toUpperCase() +
-                    "" +
-                    String(user.family_name).charAt(0).toUpperCase()}
-              </UserStyle>
-            </IconsContainer>
-            {isLogoutOpen && (
-              <DropdownListContainer>
-                <DropdownListLogout>
-                  <DropdownItem
-                    onClick={() =>
-                      logout({
-                        returnTo: window.location.origin,
-                      })
-                    }
-                  >
-                    Logout
-                  </DropdownItem>
-                </DropdownListLogout>
-              </DropdownListContainer>
-            )}
-          </DropdownContainer>
-        </HeaderStyle>
+      {isSmallSearchClicked && (
+        <SmallSearch
+          onViewResults={handleViewResults}
+          onBackClick={handleSmallScrean}
+        ></SmallSearch>
       )}
+      <HeaderStyle>
+        <LogoContainer>
+          <SmallLogo />
+        </LogoContainer>
+        <SearchContainer>
+          <SearchElement />
+        </SearchContainer>
+        <DropdownContainer>
+          <IconsContainer>
+            <SmallSearchIcon
+              onClick={handleSmallScrean}
+              src={Search}
+              alt="serch elememt"
+            />
+            <img src={Settings} alt="serch elememt"></img>
+            <img src={Notifications} alt="serch elememt"></img>
+            <UserStyle onClick={toggling}>
+              {user &&
+                String(user.name).charAt(0).toUpperCase() +
+                  "" +
+                  String(user.family_name).charAt(0).toUpperCase()}
+            </UserStyle>
+          </IconsContainer>
+          {isLogoutOpen && (
+            <DropdownListContainer>
+              <DropdownListLogout>
+                <DropdownItem
+                  onClick={() =>
+                    logout({
+                      returnTo: window.location.origin,
+                    })
+                  }
+                >
+                  Logout
+                </DropdownItem>
+              </DropdownListLogout>
+            </DropdownListContainer>
+          )}
+        </DropdownContainer>
+      </HeaderStyle>
+      {/* )} */}
     </>
   );
 };

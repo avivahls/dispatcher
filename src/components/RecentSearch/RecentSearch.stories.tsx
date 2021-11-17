@@ -1,17 +1,16 @@
 import { Meta, Story } from "@storybook/react";
-import SmallScreenRecentSearch, {
-  RecentSearchProps,
-} from "./SmallRecentSearch";
+import RecentSearch, { RecentSearchProps } from "./RecentSearch";
 
 export default {
-  component: SmallScreenRecentSearch,
+  component: RecentSearch,
   title: "Components/RecentSearch",
 } as Meta;
 
 const Template1: Story<RecentSearchProps> = (args) => (
-  <SmallScreenRecentSearch {...args} />
+  <RecentSearch {...args} />
 );
 export const data = Template1.bind({});
 data.args = {
+  isSmallScrean: true,
   items: ["tgtgt", "gggg", "fffff"],
 };

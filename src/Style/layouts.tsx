@@ -21,7 +21,6 @@ export const IPAD_SIZE = "770px";
 export const FilterOptions: Filters = {
   everything: {
     sortby: ["relevancy", "popularity", "publishedAt"],
-    dates: [],
     sources: [],
     language: [
       "ar",
@@ -112,7 +111,6 @@ export const FilterOptions: Filters = {
 export const selectedFilters: Filters = {
   everything: {
     sortby: [],
-    dates: [],
     sources: [],
     language: [],
   },

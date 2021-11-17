@@ -35,7 +35,7 @@ export const IconsContainer = styled(FlexRow)`
   align-items: center;
   color: white;
   float: right;
-  margin: auto 5px;
+  margin: auto 15px;
 `;
 export const LogoContainer = styled.div`
   width: 10%;

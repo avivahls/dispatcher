@@ -23,15 +23,12 @@ export const Dropdown = ({ title, items }: DropdownProps) => {
   const [selectedOption, setSelectedOption] = useState("");
   const dispatch = useDispatch();
 
-  const onOptionClicked = useCallback(
-    (value: string) => {
-      dispatch(newsActions.addOptions({ category: title, value: value }));
-      setSelectedOption(value);
-      setIsOpen(false);
-      dispatch(getApi(false));
-    },
-    [dispatch, title]
-  );
+  const onOptionClicked = (value: string) => {
+    dispatch(newsActions.addOptions({ category: title, value: value }));
+    setSelectedOption(value);
+    setIsOpen(false);
+    dispatch(getApi(false, 1));
+  };
   const toggling = useCallback(() => {
     setIsOpen((prevIsOpen) => !prevIsOpen);
   }, []);
