@@ -6,9 +6,9 @@ export default {
   title: "Components/Dropdown",
 } as Meta;
 
-const Template: Story<DropdownProps> = (args) => <Dropdown {...args} />;
-export const regular = Template.bind({});
-regular.args = {
-  title: "Sources",
-  items: ["Mako", "Ynet", "Walla"],
-};
+// const Template: Story<DropdownProps> = (args) => <Dropdown {...args} />;
+// export const regular = Template.bind({});
+// regular.args = {
+//   title: "Sources",
+//   items: ["Mako", "Ynet", "Walla"],
+// };

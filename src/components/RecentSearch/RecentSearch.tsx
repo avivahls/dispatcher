@@ -41,6 +41,8 @@ const RecentSearch: FC<RecentSearchProps> = ({
             <SmallRecentSearchItem key={key}>
               <p onClick={() => setValueHandler(item)}> {item}</p>
               <SmallIcon
+                isFiltered={false}
+                isSmall={false}
                 onClick={() => deleteHandler(item)}
                 src={Exit}
               ></SmallIcon>
@@ -50,7 +52,7 @@ const RecentSearch: FC<RecentSearchProps> = ({
       </>
     ) : (
       <RecentSearchContainer>
-        <RecentSearchTitle>
+        <RecentSearchTitle style={{ marginRight: "10px" }}>
           RECENT SEARCHES
           <TextButton onClick={clearHandler}>Clear</TextButton>
         </RecentSearchTitle>
@@ -59,6 +61,8 @@ const RecentSearch: FC<RecentSearchProps> = ({
             <RecentSearchItem key={key}>
               <p onClick={() => setValueHandler(item)}> {item}</p>
               <SmallIcon
+                isFiltered={false}
+                isSmall={false}
                 onClick={() => deleteHandler(item)}
                 src={Exit}
               ></SmallIcon>

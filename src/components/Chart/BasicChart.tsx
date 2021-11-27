@@ -1,7 +1,9 @@
 import { ChartData } from "chart.js";
 import React, { FC, useCallback } from "react";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
+import { GREY } from "../../style/Colors";
 import { NoChartStyle, NoDataContainer } from "../NoData/NoDataStyle";
+
 import { ChartType, IChartData } from "./ChartType";
 
 export interface ChartProps {
@@ -16,10 +18,15 @@ const BasicChart: FC<ChartProps> = ({ chartType, state, options }) => {
       switch (chartType) {
         case ChartType.Doughnut:
           return (
-            <Doughnut
-              data={state as ChartData<"doughnut", number[], string>}
-              options={options}
-            />
+            <>
+              <Doughnut
+                data={state as ChartData<"doughnut", number[], string>}
+                options={options}
+              />
+              <div style={{ position: "absolute", color: GREY }}>
+                {state.labels.length}
+              </div>
+            </>
           );
         case ChartType.Bar:
           return (

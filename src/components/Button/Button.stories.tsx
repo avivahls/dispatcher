@@ -16,7 +16,7 @@ export default {
 const TemplatePrimary: Story = (args) => (
   <PrimaryButton {...args}>
     Primary
-    <Icon src={Arrow} />
+    <Icon isFiltered={false} isSmall={false} src={Arrow} />
   </PrimaryButton>
 );
 export const Primary = TemplatePrimary.bind({});

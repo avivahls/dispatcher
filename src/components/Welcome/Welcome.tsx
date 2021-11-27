@@ -37,7 +37,7 @@ const Welcome: FC = () => {
             }
           >
             CONTINUE
-            <Icon src={Arrow} />
+            <Icon isFiltered={false} isSmall={false} src={Arrow} />
           </WelcomeButton>
         </WelcomeData>
       </WelcomeContent>

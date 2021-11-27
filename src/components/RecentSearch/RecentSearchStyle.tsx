@@ -8,7 +8,8 @@ import {
 import { FlexCol, FlexRow } from "../../style/layouts";
 
 export const RecentSearchContainer = styled(FlexCol)`
-  padding: 5px 16px;
+  color: ${GREY};
+  padding: 5px 0px;
   border: none;
   font-style: normal;
   font-weight: 500;
@@ -17,17 +18,23 @@ export const RecentSearchContainer = styled(FlexCol)`
   background-color: white;
   border-radius: 10px;
   position: relative;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
   z-index: 3;
 `;
 export const RecentSearchTitle = styled(FlexRow)`
+  font-weight: bold;
   justify-content: space-between;
+  padding-left: 15px;
+  padding-top: 15px;
 `;
 export const RecentSearchItem = styled(FlexRow)`
   cursor: pointer;
   justify-content: space-between;
   font-size: 13px;
   font-weight: normal;
-  margin: 5px 0;
+  padding: 0px 15px;
+
+  margin: 0;
   &:hover {
     background: ${DROPDOWN_HOVER};
   }
@@ -35,7 +42,7 @@ export const RecentSearchItem = styled(FlexRow)`
 
 export const SmallRecentSearch = styled(FlexCol)`
   color: ${GREY};
-  padding: 15px 16px;
+  padding: 5px 0px;
   border: none;
   font-style: normal;
   font-weight: 500;
@@ -49,15 +56,16 @@ export const SmallRecentSearch = styled(FlexCol)`
 export const SmallRecentSearchTitle = styled(FlexRow)`
   justify-content: space-between;
   font-weight: bold;
+  padding: 15px;
 `;
 export const SmallRecentSearchItem = styled(FlexRow)`
   cursor: pointer;
   justify-content: space-between;
   border-bottom: 1px solid ${BORDER_COLOR};
-  padding: 5px 15px;
+  padding: 0px 15px;
   font-size: 13px;
   font-weight: normal;
-  margin: 5px 0;
+  margin: 0;
   &:hover {
     background: ${DROPDOWN_HOVER};
   }

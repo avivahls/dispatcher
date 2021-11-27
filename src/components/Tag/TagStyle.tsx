@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { GREY, LIGHT_GREY_3 } from "../../style/Colors";
+import { MOBILE_SIZE } from "../../style/layouts";
 import "./../../index.css";
 
 export const TagStyle = styled.p`
@@ -16,4 +17,7 @@ export const TagStyle = styled.p`
   color: ${GREY};
   background: ${LIGHT_GREY_3};
   border-radius: 10px;
+  @media only screen and (max-width: ${MOBILE_SIZE}) {
+    font-size: 10px;
+  }
 `;

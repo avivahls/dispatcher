@@ -1,6 +1,6 @@
 import React, { FC, useCallback } from "react";
 import { Icon, PrimaryButton } from "../Button/ButtonStyle";
-import noImage from "../../assets/noImage.png";
+import noImage from "../../assets/noPhoto.jpeg";
 import moment from "moment";
 import {
   CardDescription,
@@ -15,7 +15,6 @@ import {
   TagList,
 } from "./CardStyle";
 import Arrow from "../../assets/Arrow - Right.svg";
-
 import { TagStyle } from "../Tag/TagStyle";
 
 export interface DataCardProps {
@@ -24,34 +23,37 @@ export interface DataCardProps {
 
 const DataCard: FC<DataCardProps> = ({ data }) => {
   const formatDate = useCallback((date: string) => {
-    const temp = moment(date).format("dddd ll");
+    const temp = moment(new Date(date)).format("dddd ll");
     return temp;
   }, []);
-
+  const containsHeb = (title: string) => {
+    return /[\u0590-\u05FF]/.test(title);
+  };
   return (
     <DataCardStyle>
-      {data.urlToImage ? (
+      {data.urlToImage &&
+      data.urlToImage !== "null" &&
+      data.urlToImage !== "" ? (
         <DataCardImg src={data.urlToImage} alt=" of news"></DataCardImg>
       ) : (
-        <img src={noImage} alt="handele empty" />
+        <DataCardImg src={noImage} alt="handele empty" />
       )}
 
       <DataCardContent>
-        <DataCardHeader>
+        <DataCardHeader isHebrew={containsHeb(data.title)}>
           {formatDate(data.publishedAt)}
-          <TagList>
-            {data.tags.map((tag: string, key: number) => (
-              <TagStyle key={key}>{tag}</TagStyle>
-            ))}
-          </TagList>
         </DataCardHeader>
-        <CardTitle>{data.title}</CardTitle>
-        <CardSource>{data.source.name}</CardSource>
-        <CardDescription>{data.description}</CardDescription>
-        <DataButtonContainer>
+        <CardTitle isHebrew={containsHeb(data.title)}>{data.title}</CardTitle>
+        <CardSource isHebrew={containsHeb(data.title)}>
+          {data.source && data.source.name}
+        </CardSource>
+        <CardDescription isHebrew={containsHeb(data.description)}>
+          {data.description}
+        </CardDescription>
+        <DataButtonContainer isHebrew={containsHeb(data.description)}>
           <PrimaryButton onClick={() => window.open(data.url, "_blank")}>
             NAVIGATE TO DISPATCH
-            <Icon src={Arrow} />
+            <Icon isFiltered={false} isSmall={false} src={Arrow} />
           </PrimaryButton>
         </DataButtonContainer>
       </DataCardContent>

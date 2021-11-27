@@ -3,6 +3,23 @@ import { IData } from "./components/Card/CardStyle";
 import { IChartData } from "./components/Chart/ChartType";
 
 export const LineChartOptions = {
+  scales: {
+    x: {
+      grid: {
+        display: false,
+      },
+    },
+    y: {
+      beginAtZero: true,
+
+      ticks: {
+        display: false,
+      },
+      grid: {
+        display: false,
+      },
+    },
+  },
   tension: 1,
   fill: {
     target: "origin",
@@ -19,6 +36,35 @@ export const BarChartOptions = {
   indexAxis: "y",
   borderRadius: 100,
   responsive: true,
+  barThickness: 16,
+  barPercentage: 0.5,
+  layout: {
+    labels: {
+      color: "rgb(255, 99, 132)",
+      font: {
+        family: "Mulish", // Add your font here to change the font of your legend label
+      },
+    },
+    padding: {
+      top: 0,
+      bottom: 0,
+    },
+  },
+  scales: {
+    x: {
+      ticks: {
+        display: false,
+      },
+      grid: {
+        display: false,
+      },
+    },
+    y: {
+      grid: {
+        display: false,
+      },
+    },
+  },
   maintainAspectRatio: false,
   plugins: {
     legend: {
@@ -27,10 +73,28 @@ export const BarChartOptions = {
   },
 };
 export const DoughnutChartOptions = {
-  cutout: "80%",
-  radius: "60%",
-  responsive: true,
-  maintainAspectRatio: false,
+  cutout: "85%",
+  // radius: "60%",
+  // responsive: true,
+  // maintainAspectRatio: false,
+  // aspectRatio: 1,
+  plugins: {
+    legend: false as any,
+
+    // {
+    //   position: "bottom",
+    //   labels: {
+    //     index: {
+    //       align: "left",
+    //     },
+    //     usePointStyle: "circle",
+    //     boxWidth: 6,
+    //     font: {
+    //       size: 12,
+    //     },
+    //   },
+    // },
+  },
 };
 
 export const LineChartState: IChartData = {
@@ -53,11 +117,27 @@ export const DoughnutChartState: IChartData = {
   ],
 };
 export const BarChartState: IChartData = {
-  labels: ["#covid19", "sport", "israel", "Economy", "Crime"],
+  labels: [
+    `#covid19   ${Number((10 / 61) * 100)
+      .toString()
+      .substr(0, 2)}%`,
+    `sport   ${Number((6 / 61) * 100)
+      .toString()
+      .substr(0, 2)}%`,
+    `israel   ${Number((8 / 61) * 100)
+      .toString()
+      .substr(0, 2)}%`,
+    `Economy   ${Number((15 / 61) * 100)
+      .toString()
+      .substr(0, 2)}%`,
+    `Crime   ${Number((12 / 61) * 100)
+      .toString()
+      .substr(0, 2)}%`,
+  ],
   datasets: [
     {
       backgroundColor: BLUE,
-      data: [65, 59, 80, 81, 56],
+      data: [10, 6, 8, 15, 12],
     },
   ],
 };

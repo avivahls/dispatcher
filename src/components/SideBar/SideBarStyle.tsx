@@ -1,7 +1,11 @@
 import styled, { css } from "styled-components";
-import { FlexCol, MOBILE_SIZE } from "../../style/layouts";
+import { LIGHT_GREY_4 } from "../../style/Colors";
+import { FlexCol, FlexRowCenter, MOBILE_SIZE } from "../../style/layouts";
 
-export const SideBarContainer = styled(FlexCol)<{ isShown: boolean }>`
+export const SideBarContainer = styled(FlexCol)<{
+  isShown: boolean;
+  isSmallSearch: boolean;
+}>`
   display: flex;
   position: fixed;
   top: 0;
@@ -10,11 +14,11 @@ export const SideBarContainer = styled(FlexCol)<{ isShown: boolean }>`
   height: 100%;
   flex-direction: column;
   background: white;
-  transition: transform 0.25s ease;
+  transition: transform 0.5s ease-in-out;
   will-change: transform;
   transform: translateX(100%);
   overflow-y: scroll;
-  z-index: 6;
+  z-index: ${(props) => (props.isSmallSearch ? 15 : 7)};
   ${(props) =>
     props.isShown
       ? css`
@@ -22,6 +26,7 @@ export const SideBarContainer = styled(FlexCol)<{ isShown: boolean }>`
           box-shadow: -0.125rem 0 1.25rem 0 #343851;
         `
       : ``};
+
   @media only screen and (max-width: ${MOBILE_SIZE}) {
     width: 80%;
   }
@@ -38,21 +43,24 @@ export const SideBarContainer = styled(FlexCol)<{ isShown: boolean }>`
     padding: 5px;
   }
 `;
-export const OtherSide = styled.div<{ isShown: boolean }>`
+export const OtherSide = styled.div<{
+  isShown: boolean;
+  isSmallSearch: boolean;
+}>`
   display: none;
   position: fixed;
   top: 0;
   left: 0;
-  width: 50%;
+  width: 100%;
   height: 100%;
   background: #303032;
   opacity: 0.7;
-  transition: transform 0.25s ease;
+  transition: transform 0.5s ease-in-out;
   will-change: transform;
   transform: translateY(100%);
   overflow-y: scroll;
 
-  z-index: 6;
+  z-index: ${(props) => (props.isSmallSearch ? 14 : 6)};
   ${(props) =>
     props.isShown
       ? css`
@@ -61,7 +69,7 @@ export const OtherSide = styled.div<{ isShown: boolean }>`
         `
       : ``};
   @media only screen and (max-width: ${MOBILE_SIZE}) {
-    width: 20%;
+    width: 100%;
   }
 `;
 export const SideBarIcon = styled.img`
@@ -70,4 +78,11 @@ export const SideBarIcon = styled.img`
   margin: 0px 8px;
   width: 30px;
   float: left;
+`;
+export const MainFilterCompStyle = styled(FlexCol)`
+  height: 100vh;
+  justify-content: space-between;
+`;
+export const SideBarButtonContainer = styled(FlexRowCenter)`
+  background-color: ${LIGHT_GREY_4};
 `;

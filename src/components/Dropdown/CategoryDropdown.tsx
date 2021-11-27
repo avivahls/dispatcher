@@ -34,20 +34,22 @@ export const CategoryDropdown = () => {
         ? CatergoryType.everything
         : CatergoryType.topheadlines;
     dispatch(newsActions.changeCategory(category));
-    dispatch(getApi(false, 1));
+    dispatch(newsActions.clearFilters());
+    dispatch(newsActions.setPageNumber(1));
+    dispatch(getApi(false));
   };
   const toggling = useCallback(() => {
     setIsOpen((prevIsOpen) => !prevIsOpen);
   }, []);
 
   return (
-    <DropdownContainer>
-      <DropdownHeader onClick={toggling}>
-        {selectedOption}
+    <DropdownContainer isDisable={false} isSmall={false}>
+      <DropdownHeader isDisable={false} onClick={toggling}>
+        {selectedOption === "everything" ? "Everything" : "Top Headlines"}
         <img src={DownIcon} alt="down icon of dropdown"></img>
       </DropdownHeader>
       {isOpen && (
-        <DropdownListContainer>
+        <DropdownListContainer isDisable={false} isSmall={false}>
           <DropdownList>
             {Object.keys(categories).map((item: string) => (
               <DropdownItem
@@ -59,7 +61,7 @@ export const CategoryDropdown = () => {
                     : {}
                 }
               >
-                {item}
+                {item === "everything" ? "Everything" : "Top Headlines"}
               </DropdownItem>
             ))}
           </DropdownList>

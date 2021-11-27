@@ -20,12 +20,13 @@ const DatePick: FC = () => {
     setEndDate(end);
     dispatch(
       newsActions.addDatesFilter({
-        from: moment(start).format("YYYY-MM-DD"),
-        to: moment(end).format("YYYY-MM-DD"),
+        from: moment(new Date(start)).format("YYYY-MM-DD"),
+        to: moment(new Date(end)).format("YYYY-MM-DD"),
       })
     );
     if (end) {
-      dispatch(getApi(false, 1));
+      dispatch(newsActions.setPageNumber(1));
+      dispatch(getApi(false));
       setIsOpen((prevIsOpen) => !prevIsOpen);
     }
   };
@@ -35,17 +36,26 @@ const DatePick: FC = () => {
 
   const renderDate = () => {
     return (
-      <DropdownContainer>
-        <DropdownHeader onClick={toggling}>
+      <DropdownContainer
+        style={{ width: "250px" }}
+        isDisable={false}
+        isSmall={false}
+      >
+        <DropdownHeader isDisable={false} onClick={toggling}>
           {endDate ? (
             <p style={{ fontSize: "18px", margin: "0px", padding: "2px" }}>
-              {moment(startDate).format("YY/MM/DD")}-
-              {moment(endDate).format("YY/MM/DD")}
+              {moment(new Date(startDate)).format("DD/MM/YY")}-
+              {moment(new Date(endDate)).format("DD/MM/YY")}
             </p>
           ) : (
             `Date`
           )}
-          <SmallIcon src={dateIcon} alt="date icon" />
+          <SmallIcon
+            isFiltered={false}
+            isSmall={false}
+            src={dateIcon}
+            alt="date icon"
+          />
         </DropdownHeader>
         {isOpen && (
           <DatePicker

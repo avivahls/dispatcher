@@ -1,7 +1,13 @@
 import React, { FC, useCallback, useState } from "react";
 import { DropdownBoldHeader } from "../Dropdown/DropdownStyle";
 import { SideBarFilter } from "../Dropdown/SideBarFilter";
-import { OtherSide, SideBarContainer, SideBarIcon } from "./SideBarStyle";
+import {
+  MainFilterCompStyle,
+  OtherSide,
+  SideBarButtonContainer,
+  SideBarContainer,
+  SideBarIcon,
+} from "./SideBarStyle";
 import { SideBarFilterStyle } from "../FilterBar/FilterBarStyle";
 import Back from "../../assets/back.svg";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +16,9 @@ import { SideBarButton } from "../Button/ButtonStyle";
 import { getApi } from "../../store/news-actions";
 import DatePicker from "react-datepicker";
 import moment from "moment";
+import { coutries, languages, sortBy } from "../../style/layouts";
+import { LIGHT_GREY_4 } from "../../style/Colors";
+import _ from "lodash";
 
 export interface SideBarProps {
   isShown: boolean;
@@ -20,6 +29,9 @@ const SideBar: FC<SideBarProps> = ({ isShown, type }) => {
   const [endDate, setEndDate] = useState<Date>();
   const [filterState, setFilterState] = useState("filters");
   const [subCategory, setSubCategory] = useState("");
+  const isSmallScreanSearch = useSelector(
+    (state: NewsGlobalState) => state.news.smallSearchMode
+  );
   const [isMainCategory, setIsMainCategory] = useState(false);
   const onChange = (dates: any) => {
     const [start, end] = dates;
@@ -27,16 +39,17 @@ const SideBar: FC<SideBarProps> = ({ isShown, type }) => {
     setEndDate(end);
     dispatch(
       newsActions.addDatesFilter({
-        from: moment(start).format("YYYY-MM-DD"),
-        to: moment(end).format("YYYY-MM-DD"),
+        from: moment(new Date(start)).format("YYYY-MM-DD"),
+        to: moment(new Date(end)).format("YYYY-MM-DD"),
       })
     );
     if (end) {
-      dispatch(getApi(false, 1));
+      // dispatch(newsActions.setPageNumber(1));
+      // dispatch(getApi(false));
       setFilterState("filters");
     }
   };
-  const MainCategory = useSelector(
+  const mainCategory = useSelector(
     (state: NewsGlobalState) => state.news.category
   );
   const selectedFilters = useSelector(
@@ -46,23 +59,76 @@ const SideBar: FC<SideBarProps> = ({ isShown, type }) => {
     (state: NewsGlobalState) => state.news.filters
   );
   const dispatch = useDispatch();
-  const onOptionClicked = useCallback(
-    (title: string, value: string) => {
-      setFilterState("filters");
-      dispatch(newsActions.addOptions({ category: title, value: value }));
-    },
-    [dispatch]
-  );
+  const onOptionClicked = (title: string, value: any) => {
+    let data = value;
+    if (
+      selectedFilters[mainCategory][title][0] === getValueOutId(title, value)
+    ) {
+      dispatch(
+        newsActions.clearSelectedFilters({
+          mainCategory: mainCategory,
+          subCategory: title,
+        })
+      );
+    } else {
+      if (title === "sources") {
+        data = value.id;
+      } else if (title === "country" || title === "language") {
+        data = (title === "country" ? coutries : languages).filter((item) => {
+          return item.value === value;
+        })[0].id;
+      }
+      dispatch(newsActions.addOptions({ category: title, value: data }));
+    }
+    setFilterState("filters");
+  };
+  const getValueOutId = (title: string, item: any) => {
+    switch (title) {
+      case "sources":
+        return _.isString(item)
+          ? item
+          : filtersOptions[mainCategory].sources.filter(
+              (data: any) => data.value === item.value
+            )[0].id;
+      case "country":
+        return coutries.filter((data: any) => data.value === item)[0].id;
+      case "language":
+        return languages.filter((data: any) => data.value === item)[0].id;
+      case "sortBy":
+        return sortBy.filter((data: any) => data.value === item)[0].id;
+      default:
+        return item;
+    }
+  };
+  const getIdOutValue = (title: string, item: any) => {
+    switch (title) {
+      case "sources":
+        return filtersOptions[mainCategory].sources.filter(
+          (data: any) => data.id === (_.isString(item) ? item : item.id)
+        )[0]?.value;
+      case "country":
+        return coutries.filter((data: any) => data.id === item)[0]?.value;
+      case "language":
+        return languages.filter((data: any) => data.id === item)[0]?.value;
+      case "sortBy":
+        return sortBy.filter((data: any) => data.id === item)[0]?.value;
+      default:
+        return item;
+    }
+  };
   const onMainCategotyChange = useCallback(
     (category) => {
       dispatch(newsActions.changeCategory(category));
+      dispatch(newsActions.clearFilters());
       setIsMainCategory(false);
       setFilterState("filters");
     },
     [dispatch]
   );
   const handleViewResults = () => {
-    dispatch(getApi(false, 1));
+    dispatch(newsActions.setPageNumber(1));
+
+    dispatch(getApi(false));
     dispatch(newsActions.changeShow());
   };
   const renderByCategory = useCallback(
@@ -70,8 +136,11 @@ const SideBar: FC<SideBarProps> = ({ isShown, type }) => {
       return (
         <>
           <SideBarFilter
+            isDisable={false}
             title="Search in"
-            selected={MainCategory}
+            selected={
+              mainCategory === "everything" ? "Everything" : "Top Headlines"
+            }
             onClickHandle={() => {
               setFilterState("options");
               setSubCategory("Search in");
@@ -79,63 +148,111 @@ const SideBar: FC<SideBarProps> = ({ isShown, type }) => {
             }}
           />
           {Object.keys(category).map((item, key) => {
-            if (item !== "sortby") {
-              return (
+            return (
+              item !== "sortby" && (
                 <SideBarFilter
+                  isDisable={isDisable(category, item)}
                   key={key}
                   title={item}
                   selected={
-                    selectedFilters[type][item]
-                      ? String(selectedFilters[type][item])
+                    item !== "sources"
+                      ? item === "category"
+                        ? selectedFilters[type][item]
+                          ? String(selectedFilters[type][item])
+                              .substr(0, 1)
+                              .toUpperCase() +
+                            String(selectedFilters[type][item]).substr(1)
+                          : ""
+                        : selectedFilters[type][item]
+                        ? String(selectedFilters[type][item])
+                        : ""
+                      : selectedFilters[type][item][0]
+                      ? getIdOutValue(item, selectedFilters[type][item][0])
                       : ""
                   }
                   onClickHandle={() => {
-                    setFilterState("options");
-                    setSubCategory(item);
+                    if (!isDisable(category, item)) {
+                      setFilterState("options");
+                      setSubCategory(item);
+                      setIsMainCategory(false);
+                    }
                   }}
                 />
-              );
-            }
+              )
+            );
           })}
           {category === filtersOptions.everything && (
             <SideBarFilter
+              isDisable={false}
               title="Date"
               selected={
                 endDate
-                  ? `${moment(startDate).format("YY/MM/DD")}-${moment(
-                      endDate
-                    ).format("YY/MM/DD")}`
+                  ? `${moment(new Date(startDate)).format("DD/MM/YY")}-${moment(
+                      new Date(endDate)
+                    ).format("DD/MM/YY")}`
                   : ``
               }
               onClickHandle={() => {
                 setFilterState("options");
                 setSubCategory("Date");
+                setIsMainCategory(false);
               }}
             />
           )}
         </>
       );
     },
-    [type, selectedFilters, MainCategory, filtersOptions, endDate, startDate]
+    [type, selectedFilters, mainCategory, filtersOptions, endDate, startDate]
   );
-
+  const isDisable = (category: any, item: string) => {
+    if (category === filtersOptions.topheadlines) {
+      if (item === "sources") {
+        console.log(selectedFilters);
+        console.log(selectedFilters.topheadlines.country.length);
+        console.log(selectedFilters.topheadlines.category.length);
+        return selectedFilters.topheadlines.country.length > 0 ||
+          selectedFilters.topheadlines.category.length > 0
+          ? true
+          : false;
+      }
+      if (item === "category") {
+        return selectedFilters.topheadlines.sources.length > 0 ? true : false;
+      }
+      if (item === "country") {
+        return selectedFilters.topheadlines.sources.length > 0 ? true : false;
+      }
+    }
+    return false;
+  };
   return (
     <>
-      <SideBarContainer isShown={isShown}>
+      <SideBarContainer isSmallSearch={isSmallScreanSearch} isShown={isShown}>
         {filterState === "filters" && (
-          <>
-            <DropdownBoldHeader>FILTER</DropdownBoldHeader>
-            {type === "everything"
-              ? renderByCategory(filtersOptions.everything)
-              : renderByCategory(filtersOptions.topheadlines)}
-            <SideBarButton onClick={() => handleViewResults()}>
-              View Results
-            </SideBarButton>
-          </>
+          <MainFilterCompStyle>
+            <div>
+              <DropdownBoldHeader
+                isDisable={false}
+                style={{ margin: "20px 12px" }}
+              >
+                FILTER
+              </DropdownBoldHeader>
+              {type === "everything"
+                ? renderByCategory(filtersOptions.everything)
+                : renderByCategory(filtersOptions.topheadlines)}
+            </div>
+            <SideBarButtonContainer>
+              <SideBarButton onClick={() => handleViewResults()}>
+                View Results
+              </SideBarButton>
+            </SideBarButtonContainer>
+          </MainFilterCompStyle>
         )}
         {filterState === "options" && subCategory !== "Date" && (
           <>
-            <DropdownBoldHeader>
+            <DropdownBoldHeader
+              style={{ marginTop: "16px", marginBottom: "16px" }}
+              isDisable={isDisable(mainCategory, subCategory)}
+            >
               <SideBarIcon
                 src={Back}
                 onClick={() => setFilterState("filters")}
@@ -145,27 +262,50 @@ const SideBar: FC<SideBarProps> = ({ isShown, type }) => {
             {isMainCategory &&
               ["everything", "topheadlines"].map((item, key) => (
                 <SideBarFilterStyle
+                  selected={mainCategory === item}
+                  isDisable={false}
                   key={key}
                   onClick={() => onMainCategotyChange(item)}
                 >
-                  {item}
+                  <p>
+                    {item === "everything" ? "Everything" : "Top Headlines"}
+                  </p>
                 </SideBarFilterStyle>
               ))}
             {!isMainCategory &&
-              subCategory !== "Date" &&
-              filtersOptions[type][subCategory].map((item, key) => (
+              filtersOptions[type][subCategory].map((item: any, key) => (
                 <SideBarFilterStyle
+                  selected={
+                    subCategory.toLowerCase() === "sources"
+                      ? item.id === selectedFilters[type][subCategory][0]
+                      : item ===
+                        getIdOutValue(
+                          subCategory,
+                          selectedFilters[type][subCategory][0]
+                        )
+                  }
+                  isDisable={false}
                   key={key}
                   onClick={() => onOptionClicked(subCategory, item)}
                 >
-                  {item}
+                  <p>
+                    {subCategory.toLowerCase() !== "sources"
+                      ? subCategory.toLowerCase() === "category"
+                        ? String(item).charAt(0).toUpperCase() +
+                          String(item).substr(1)
+                        : item
+                      : item.value}
+                  </p>
                 </SideBarFilterStyle>
               ))}
           </>
         )}
         {filterState === "options" && subCategory === "Date" && (
           <>
-            <DropdownBoldHeader>
+            <DropdownBoldHeader
+              style={{ marginTop: "16px", marginBottom: "16px" }}
+              isDisable={false}
+            >
               <SideBarIcon
                 src={Back}
                 onClick={() => setFilterState("filters")}
@@ -185,6 +325,7 @@ const SideBar: FC<SideBarProps> = ({ isShown, type }) => {
         )}
       </SideBarContainer>
       <OtherSide
+        isSmallSearch={isSmallScreanSearch}
         onClick={() => dispatch(newsActions.changeShow())}
         isShown={isShown}
       />
