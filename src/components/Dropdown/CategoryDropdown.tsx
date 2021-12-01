@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DownIcon from "../../assets/dropdown.svg";
 import { getApi } from "../../store/news-actions";
 import { newsActions, NewsGlobalState } from "../../store/news-slice";
-import { LIGHT_GREY_4 } from "../../style/Colors";
+import { LIGHT_GREY_4 } from "../../utils/colors";
 import { CatergoryType } from "../FilterBar/FilterBarStyle";
 
 import {
@@ -34,13 +33,13 @@ export const CategoryDropdown = () => {
         ? CatergoryType.everything
         : CatergoryType.topheadlines;
     dispatch(newsActions.changeCategory(category));
-    dispatch(newsActions.clearFilters());
+    // dispatch(newsActions.clearFilters());
     dispatch(newsActions.setPageNumber(1));
     dispatch(getApi(false));
   };
-  const toggling = useCallback(() => {
+  const toggling = () => {
     setIsOpen((prevIsOpen) => !prevIsOpen);
-  }, []);
+  };
 
   return (
     <DropdownContainer isDisable={false} isSmall={false}>
@@ -51,7 +50,7 @@ export const CategoryDropdown = () => {
       {isOpen && (
         <DropdownListContainer isDisable={false} isSmall={false}>
           <DropdownList>
-            {Object.keys(categories).map((item: string) => (
+            {Object.keys(categories).map((item: string, key: number) => (
               <DropdownItem
                 onClick={() => onOptionClicked(item)}
                 key={Math.random()}

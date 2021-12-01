@@ -1,11 +1,11 @@
 import styled, { css } from "styled-components";
-import { GREY } from "../../style/Colors";
+import { GREY } from "../../utils/colors";
 import {
   FlexCol,
   FlexRowCenter,
   IPAD_SIZE,
   MOBILE_SIZE,
-} from "../../style/layouts";
+} from "../../utils/layouts";
 
 export const SearchAndRecentContainer = styled(FlexCol)<{
   isSearchable: boolean;
@@ -66,12 +66,6 @@ export const SmallSearchStyle = styled(FlexRowCenter)<{
   height: 54px;
   padding: 10px;
   margin: 0px;
-  /* ${(props) =>
-    props.isSearchMode
-      ? css`
-          border-bottom: 3px solid black;
-        `
-      : ``} */
 `;
 export const InputStyle = styled.input.attrs({
   type: "text",

@@ -1,13 +1,11 @@
 import styled, { css } from "styled-components";
 import {
   BLUE,
-  CARD_HEADER,
-  DROPDOWN_HOVER,
   GREY,
   LIGHT_GREY_2,
   TEXT_BTN_BACKGROUND,
-} from "../../style/Colors";
-import { IPAD_SIZE, MOBILE_SIZE } from "../../style/layouts";
+} from "../../utils/colors";
+import { IPAD_SIZE, MOBILE_SIZE } from "../../utils/layouts";
 
 export const ButtonStyled = styled.button`
   display: flex;
@@ -68,9 +66,6 @@ export const PrimaryButton = styled(ButtonStyled)`
   }
   @media only screen and (max-width: ${MOBILE_SIZE}) {
     width: 100%;
-    /* margin: 10px auto;
-    margin-bottom: 5px;
-    width: 95%; */
   }
 `;
 export const SideBarButton = styled(PrimaryButton)`

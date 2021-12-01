@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Filters } from "../components/FilterBar/FilterBarStyle";
+import { GREY, MODAL } from "./colors";
 
 export const FlexCol = styled.div`
   display: flex;
@@ -49,7 +50,21 @@ export const filtersHeaders = [
   { id: "sortby", value: "Sort By" },
   { id: "language", value: "Language" },
 ];
-
+export const customStyles = {
+  overlay: { zIndex: 1000, background: MODAL },
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    color: GREY,
+    outline: "none",
+    borderRadius: "20px",
+    background: "#fff",
+    transform: "translate(-50%, -50%)",
+  },
+};
 export const FilterOptions: Filters = {
   everything: {
     sortby: sortBy.map((item) => item.value),

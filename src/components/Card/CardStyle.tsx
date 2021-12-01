@@ -1,12 +1,12 @@
 import styled, { css } from "styled-components";
-import { CARD_HEADER, GREY, LIGHT_GREY_2, SHADOW } from "../../style/Colors";
+import { CARD_HEADER, GREY, LIGHT_GREY_2, SHADOW } from "../../utils/colors";
 import {
   FlexRow,
   FlexRowCenter,
   IPAD_SIZE,
   MOBILE_SIZE,
   SMALL_PC,
-} from "../../style/layouts";
+} from "../../utils/layouts";
 import { ChartType } from "../Chart/ChartType";
 
 export const BasicCard = styled(FlexRowCenter)`
@@ -26,19 +26,17 @@ export const BasicCard = styled(FlexRowCenter)`
 
 export const DataCardStyle = styled(BasicCard)`
   margin: 0 10px 20px 0;
-  width: 97%;
+  width: 98%;
   height: 300px;
   margin-left: auto;
-  @media only screen and (max-width: 1000px) and (min-width: ${IPAD_SIZE}) {
-    /* margin-left: 15px; */
-    /* margin-right: 0px;
-    height: 400px; */
+  @media only screen and (max-width: 1050px) and (min-width: ${IPAD_SIZE}) {
+    width: 93%;
   }
 
   @media only screen and (max-width: ${MOBILE_SIZE}) {
     margin-top: 10px;
     height: fit-content;
-    width: 98%;
+    width: 96%;
   }
 `;
 export const ChartCardStyle = styled(BasicCard)<{ type: ChartType }>`
@@ -66,20 +64,12 @@ export const ChartCardStyle = styled(BasicCard)<{ type: ChartType }>`
   @media only screen and (min-width: 1700px) {
     height: 400px;
     width: 400px;
-    /* margin: 0 10px 20px 0; */
   }
 `;
-export const DataCardHeader = styled(FlexRow)<{ isHebrew: boolean }>`
+export const DataCardHeader = styled(FlexRow)`
   justify-content: space-between;
   color: ${CARD_HEADER};
   margin-top: 0px;
-  ${(props) =>
-    props.isHebrew
-      ? css`
-          direction: rtl;
-          padding-right: 15px;
-        `
-      : ``}
   @media only screen and (max-width: ${MOBILE_SIZE}) {
     margin: 10px auto;
     margin-left: 0px;
@@ -129,16 +119,9 @@ export const ChartDivider = styled.div`
   border-radius: 10px;
   margin-bottom: 10px;
 `;
-export const CardSource = styled.div<{ isHebrew: boolean }>`
+export const CardSource = styled.div`
   color: ${CARD_HEADER};
   margin: 10px 0;
-  ${(props) =>
-    props.isHebrew
-      ? css`
-          direction: rtl;
-          padding-right: 15px;
-        `
-      : ``}
   @media only screen and (max-width: ${MOBILE_SIZE}) {
     padding-right: 5px;
     padding-left: 5px;
@@ -152,8 +135,9 @@ export const CardDescription = styled.div<{ isHebrew: boolean }>`
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  padding-left: 0px;
   margin-bottom: 0px;
+  margin: 10px 0px;
+  padding: 0px;
   ${(props) =>
     props.isHebrew
       ? css`
@@ -161,28 +145,30 @@ export const CardDescription = styled.div<{ isHebrew: boolean }>`
           padding-right: 15px;
         `
       : ``}
+  @media only screen and (max-width: 1050px) and (min-width: ${IPAD_SIZE}) {
+    width: 31vw;
+  }
+  @media only screen and (min-width: 1050px) and (max-width: 1450px) {
+    width: 34vw;
+  }
   @media only screen and (max-width: ${IPAD_SIZE}) {
     width: 64vw;
     padding-right: 15px;
+    margin: 10px 0px;
   }
   @media only screen and (max-width: ${MOBILE_SIZE}) {
     width: 87vw;
     padding: 5px;
     font-size: 15px;
     padding: 1px 0px;
-    /* padding-left: 5px; */
-
     margin-bottom: 10px;
-  }
-  @media only screen and (max-width: 1090px) {
-    margin-top: 0px;
   }
 `;
 export const CardTitle = styled.span<{ isHebrew: boolean }>`
   font-size: 20px;
   font-weight: bold;
-  padding: 5px 0px;
-  margin: 20px 0px;
+  padding: 0px;
+  margin: 10px 0px;
   ${(props) =>
     props.isHebrew
       ? css`
@@ -201,16 +187,14 @@ export const ChartCardTitle = styled.span`
   font-weight: bold;
   margin-bottom: 10px;
 `;
-export const DataButtonContainer = styled.div<{ isHebrew: boolean }>`
+export const DataButtonContainer = styled.div`
   float: right;
-  margin: 20px 0px;
-  margin-right: 5px;
-  align-self: ${(props) => (props.isHebrew ? "start" : "flex-end")};
-  @media only screen and (max-width: 1090px) {
+  margin: 10px 0px;
+  margin-right: 15px;
+  align-self: flex-end;
+  @media only screen and (max-width: ${MOBILE_SIZE}) {
     margin: 0px;
     margin-top: 10px;
-  }
-  @media only screen and (max-width: ${MOBILE_SIZE}) {
     width: 100%;
   }
 `;

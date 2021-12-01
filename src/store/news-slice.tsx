@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { IDoughnutData, ILineData } from "../components/Chart/ChartType";
 import { CatergoryType, Filters } from "../components/FilterBar/FilterBarStyle";
 import { DoughnutChartState, LineChartState } from "../MockData";
-import { FilterOptions, selectedFiltersOptions } from "../style/layouts";
+import { FilterOptions, selectedFiltersOptions } from "../utils/layouts";
 export interface NewsGlobalState {
   news: {
     totalResults: number;

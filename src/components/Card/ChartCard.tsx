@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from "react";
+import React, { FC } from "react";
 import BasicChart from "../Chart/BasicChart";
 import { ChartType, IChartData } from "../Chart/ChartType";
 import { ChartCardStyle, ChartCardTitle, ChartDivider } from "./CardStyle";
@@ -10,35 +10,47 @@ import {
   LegendData,
   LegendTitle,
 } from "../Chart/ChartStyle";
-import { CHART_COLORS } from "../../style/Colors";
-import PieLoader from "../Loader/PieLoader";
-import LineLoader from "../Loader/LineLoader";
-import { stringify } from "querystring";
+import { CHART_COLORS } from "../../utils/colors";
+import _ from "lodash";
 export interface ChartCardProps {
   title: string;
   type: ChartType;
   state: IChartData;
   options: {};
 }
-
+const sortSourcesByPercentage = (state: any) => {
+  let tempArray: any[] = [];
+  state.labels.forEach((label: string, index: number) => {
+    tempArray[index] = {
+      label: label,
+      value: state.datasets[0].data[index],
+    };
+  });
+  return _.orderBy(tempArray, ["value"], ["desc"]);
+};
+const renderSourcesLabels = (state: any, totalSum: number) => {
+  let dataa = sortSourcesByPercentage(state);
+  return (
+    <LegendListContainer>
+      {dataa.map((item: any, index: number) => (
+        <LegendContainer key={index}>
+          <TitleAndBullet>
+            <LegendBullet
+              color={CHART_COLORS[index === 0 ? index : index % 4]}
+            />
+            <LegendTitle>{item.label}</LegendTitle>
+          </TitleAndBullet>
+          <LegendData>{Math.round((item.value * 100) / totalSum)}%</LegendData>
+        </LegendContainer>
+      ))}
+    </LegendListContainer>
+  );
+};
 const ChartCard: FC<ChartCardProps> = ({ title, type, state, options }) => {
   let totalSum = 0;
   state.datasets[0].data.forEach((item: number) => {
     totalSum += item;
   });
-  const sortSourcesByPercentage = (state: any, labels: any) => {
-    const tempArray: any[] = [];
-    labels.map((label: string, index: number) => {
-      tempArray.push({
-        label: label,
-        value: state.datasets[0].data[index] * 100,
-      });
-    });
-    tempArray.sort((a, b) => {
-      return a.value - b.value;
-    });
-    return tempArray.map((item) => item.label);
-  };
   return (
     <ChartCardStyle type={type}>
       {type === ChartType.Doughnut && (
@@ -69,26 +81,7 @@ const ChartCard: FC<ChartCardProps> = ({ title, type, state, options }) => {
               options={options}
             ></BasicChart>
           )}
-          <LegendListContainer>
-            {sortSourcesByPercentage(state, state.labels).map(
-              (label, index) => (
-                <LegendContainer>
-                  <TitleAndBullet>
-                    <LegendBullet
-                      color={CHART_COLORS[index === 0 ? index : index % 4]}
-                    />
-                    <LegendTitle>{label}</LegendTitle>
-                  </TitleAndBullet>
-                  <LegendData>
-                    {Math.round(
-                      (state.datasets[0].data[index] * 100) / totalSum
-                    )}
-                    %
-                  </LegendData>
-                </LegendContainer>
-              )
-            )}
-          </LegendListContainer>
+          {renderSourcesLabels(state, totalSum)}
         </>
       )}
       {type !== ChartType.Doughnut && (

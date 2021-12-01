@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from "react";
+import React, { FC, useState } from "react";
 import { SmallLogo } from "../Logo/LogoStyle";
 import SearchElement from "../Search/SearchElement";
 import {
@@ -8,8 +8,6 @@ import {
   SearchContainer,
   UserStyle,
 } from "./HeaderStyle";
-import Notifications from "../../assets/notifications.svg";
-import Settings from "../../assets/settings.svg";
 import Search from "../../assets/search.svg";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
@@ -23,7 +21,6 @@ import SmallSearch from "../Search/SmallSearch";
 import { getApi } from "../../store/news-actions";
 import { useDispatch } from "react-redux";
 import { newsActions } from "../../store/news-slice";
-// import { newsActions } from "../../store/news-slice";
 
 const HeaderElement: FC = () => {
   const [isLogoutOpen, setIsLogoutOpen] = useState(false);
@@ -31,9 +28,9 @@ const HeaderElement: FC = () => {
   const { logout } = useAuth0();
   const { user } = useAuth0();
   const dispatch = useDispatch();
-  const toggling = useCallback(() => {
+  const toggling = () => {
     setIsLogoutOpen((prevIsOpen) => !prevIsOpen);
-  }, []);
+  };
   const handleSmallScrean = () => {
     setIsSmallSearch((prev) => !prev);
     dispatch(newsActions.setSmallSearchMode(false));
@@ -49,13 +46,11 @@ const HeaderElement: FC = () => {
 
   return (
     <>
-      {/* {isSmallSearchClicked && ( */}
       <SmallSearch
         isSearch={isSmallSearchClicked}
         onViewResults={handleViewResults}
         onBackClick={handleSmallScrean}
       ></SmallSearch>
-      {/* )} */}
       <HeaderStyle>
         <LogoContainer>
           <SmallLogo />
@@ -96,7 +91,6 @@ const HeaderElement: FC = () => {
           </IconsContainer>
         </DropdownContainer>
       </HeaderStyle>
-      {/* )} */}
     </>
   );
 };

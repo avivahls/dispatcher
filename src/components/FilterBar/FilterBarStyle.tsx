@@ -4,8 +4,8 @@ import {
   DROPDOWN_HOVER,
   GREY,
   LIGHT_GREY_2,
-} from "../../style/Colors";
-import { FlexRow, IPAD_SIZE } from "../../style/layouts";
+} from "../../utils/colors";
+import { FlexRow, IPAD_SIZE } from "../../utils/layouts";
 import "./../../index.css";
 
 export enum CatergoryType {

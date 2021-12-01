@@ -1,17 +1,27 @@
-import { BLUE, CHART_COLORS, LINE_BACKGROUND } from "./style/Colors";
+import { BLUE, CHART_COLORS, LINE_BACKGROUND } from "./utils/colors";
 import { IData } from "./components/Card/CardStyle";
 import { IChartData } from "./components/Chart/ChartType";
 
 export const LineChartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      display: false,
+    },
+  },
   scales: {
     x: {
       grid: {
         display: false,
       },
+      ticks: {
+        display: true,
+      },
     },
     y: {
+      display: false,
       beginAtZero: true,
-
       ticks: {
         display: false,
       },
@@ -20,16 +30,9 @@ export const LineChartOptions = {
       },
     },
   },
-  tension: 1,
+  tension: 0.5,
   fill: {
     target: "origin",
-  },
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: {
-    legend: {
-      display: false,
-    },
   },
 };
 export const BarChartOptions = {
@@ -42,7 +45,7 @@ export const BarChartOptions = {
     labels: {
       color: "rgb(255, 99, 132)",
       font: {
-        family: "Mulish", // Add your font here to change the font of your legend label
+        family: "Mulish",
       },
     },
     padding: {
@@ -74,26 +77,8 @@ export const BarChartOptions = {
 };
 export const DoughnutChartOptions = {
   cutout: "85%",
-  // radius: "60%",
-  // responsive: true,
-  // maintainAspectRatio: false,
-  // aspectRatio: 1,
   plugins: {
     legend: false as any,
-
-    // {
-    //   position: "bottom",
-    //   labels: {
-    //     index: {
-    //       align: "left",
-    //     },
-    //     usePointStyle: "circle",
-    //     boxWidth: 6,
-    //     font: {
-    //       size: 12,
-    //     },
-    //   },
-    // },
   },
 };
 
@@ -176,4 +161,18 @@ export const DUMMY2: IData = {
   publishedAt: "2021-10-17T16:52:24.4379934Z",
   content:
     "An ancient Indigenous knife unearthed during the renovation of Centre Block will be the first artifact found on Parliament Hill to be returned to the stewardship of the Algonquin people who live in t… [+3927 chars]",
+};
+export const EmptyDUMMY: IData = {
+  source: {
+    id: "",
+    name: "",
+  },
+  tags: [],
+  author: "",
+  title: "",
+  description: "",
+  url: "",
+  urlToImage: "",
+  publishedAt: "",
+  content: null,
 };

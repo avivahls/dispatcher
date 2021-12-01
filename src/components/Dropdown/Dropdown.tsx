@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DownIcon from "../../assets/dropdown.svg";
 import { getApi } from "../../store/news-actions";
@@ -9,7 +8,7 @@ import {
   filtersHeaders,
   languages,
   sortBy,
-} from "../../style/layouts";
+} from "../../utils/layouts";
 
 import {
   DropdownContainer,
@@ -65,7 +64,7 @@ export const Dropdown = ({
         return coutries.filter((data: any) => data.value === item)[0].id;
       case "language":
         return languages.filter((data: any) => data.value === item)[0].id;
-      case "sortBy":
+      case "sortby":
         return sortBy.filter((data: any) => data.value === item)[0].id;
       default:
         return item;
@@ -93,12 +92,13 @@ export const Dropdown = ({
         })[0].id;
         setSelectedOption(value);
       } else if (title === "category") {
-        console.log(
-          String(value).substr(0, 1).toUpperCase() + String(value).substr(1)
-        );
         setSelectedOption(
           String(value).substr(0, 1).toUpperCase() + String(value).substr(1)
         );
+      } else if (title === "sortby") {
+        if (value === "Published At") data = "publishedAt";
+        else data = String(value).toLowerCase();
+        setSelectedOption(value);
       } else {
         setSelectedOption(value);
       }
@@ -124,9 +124,9 @@ export const Dropdown = ({
         return item === selectedOption;
     }
   };
-  const toggling = useCallback(() => {
+  const toggling = () => {
     setIsOpen((prevIsOpen) => !prevIsOpen);
-  }, []);
+  };
 
   const existSelectedOption = () => {
     if (title === "sources") {

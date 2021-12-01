@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { GREY, LIGHT_GREY_3 } from "../../style/Colors";
-import { MOBILE_SIZE } from "../../style/layouts";
+import { GREY, LIGHT_GREY_3 } from "../../utils/colors";
+import { MOBILE_SIZE } from "../../utils/layouts";
 import "./../../index.css";
 
 export const TagStyle = styled.p`

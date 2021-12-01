@@ -45,6 +45,7 @@ export const getApi = (start: boolean) => {
             temp === "" ? "?" : "&"
           }apiKey=${API_KEY}&pageSize=${pageSize}&page=${state.pageNumber}`
         );
+        console.log(temp);
         dispatch(newsActions.changeLoading(false));
         const currentData = response?.data.articles.map((article: {}) => {
           return { ...article };
@@ -57,10 +58,8 @@ export const getApi = (start: boolean) => {
         }
         if (state.pageNumber > 1) {
           arWithTags = [...state.data, ...currentData];
-          console.log(arWithTags);
         } else {
           arWithTags = currentData;
-          console.log(arWithTags);
         }
 
         dispatch(newsActions.setErrorMessage(""));
@@ -103,7 +102,6 @@ export const getSources = () => {
       const response = await axios.get<any>(
         `${URL}top-headlines/sources?apiKey=${API_KEY}`
       );
-
       if (response.status !== 200) {
         throw new Error("Could not fetch news");
       }

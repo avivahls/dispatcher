@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getApi, getSources } from "../../store/news-actions";
 import { newsActions, NewsGlobalState } from "../../store/news-slice";
@@ -14,7 +14,7 @@ import {
   DashboardTitle,
   DashboardTitleTotal,
 } from "./HomeStyle";
-import { GREY, MODAL } from "../../style/Colors";
+import { customStyles } from "../../utils/layouts";
 
 const Home: FC = () => {
   const isShown = useSelector(
@@ -38,28 +38,10 @@ const Home: FC = () => {
     (state: NewsGlobalState) => state.news.isFirstData
   );
   const dispatch = useDispatch();
-  const [modalIsOpen, setIsOpen] = useState(true);
   const error = useSelector(
     (state: NewsGlobalState) => state.news.errorMessage
   );
-  function openModal() {
-    setIsOpen(true);
-  }
-  const customStyles = {
-    overlay: { zIndex: 1000, background: MODAL },
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      color: GREY,
-      outline: "none",
-      borderRadius: "20px",
-      background: "#fff",
-      transform: "translate(-50%, -50%)",
-    },
-  };
+
   function closeModal() {
     dispatch(newsActions.setErrorMessage(""));
   }
@@ -74,6 +56,7 @@ const Home: FC = () => {
   return (
     <>
       <Modal
+        ariaHideApp={false}
         isOpen={error !== ""}
         onRequestClose={closeModal}
         style={customStyles}
@@ -90,12 +73,12 @@ const Home: FC = () => {
       <DashboardDivider />
       {isFirst ? (
         <DashboardTitle>Top Headlines in Israel</DashboardTitle>
+      ) : total > 0 ? (
+        <DashboardTitleTotal>
+          {articles.length} out of {total} results
+        </DashboardTitleTotal>
       ) : (
-        total > 0 && (
-          <DashboardTitleTotal>
-            {articles.length} / {total} Total Result
-          </DashboardTitleTotal>
-        )
+        <DashboardTitleTotal></DashboardTitleTotal>
       )}
       <Dashboard isSmall={isSmallSearch}>
         <DataCardList loadState={isLoading} />

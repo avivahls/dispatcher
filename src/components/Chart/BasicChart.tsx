@@ -1,7 +1,7 @@
 import { ChartData } from "chart.js";
 import React, { FC, useCallback } from "react";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
-import { GREY } from "../../style/Colors";
+import { GREY } from "../../utils/colors";
 import { NoChartStyle, NoDataContainer } from "../NoData/NoDataStyle";
 
 import { ChartType, IChartData } from "./ChartType";
@@ -50,7 +50,6 @@ const BasicChart: FC<ChartProps> = ({ chartType, state, options }) => {
   );
   return (
     <>
-      {" "}
       {state.labels.length !== 0 ? (
         renderChart({ chartType, state, options })
       ) : (

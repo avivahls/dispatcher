@@ -14,6 +14,9 @@ import { newsActions, NewsGlobalState } from "../../store/news-slice";
 
 const FilterBar: FC<FilterProps> = ({ type }) => {
   const [closeDropdowns, setCloseDropdowns] = useState(false);
+  const searchValue = useSelector(
+    (state: NewsGlobalState) => state.news.searchValue
+  );
   const filtersOptions = useSelector((state: any) => state.news.filters);
   const selectedFilters = useSelector(
     (state: NewsGlobalState) => state.news.selectedFilters
@@ -28,9 +31,6 @@ const FilterBar: FC<FilterProps> = ({ type }) => {
   const isDisable = (category: any, item: string) => {
     if (category === filtersOptions.topheadlines) {
       if (item === "sources") {
-        console.log(selectedFilters);
-        console.log(selectedFilters.topheadlines.country.length);
-        console.log(selectedFilters.topheadlines.category.length);
         return selectedFilters.topheadlines.country.length > 0 ||
           selectedFilters.topheadlines.category.length > 0
           ? true
@@ -41,6 +41,10 @@ const FilterBar: FC<FilterProps> = ({ type }) => {
       }
       if (item === "country") {
         return selectedFilters.topheadlines.sources.length > 0 ? true : false;
+      }
+    } else {
+      if (item !== "sources") {
+        if (searchValue === "") return true;
       }
     }
     return false;
@@ -62,7 +66,9 @@ const FilterBar: FC<FilterProps> = ({ type }) => {
               />
             );
           })}
-          {category === filtersOptions.everything && <DatePick />}
+          {category === filtersOptions.everything && (
+            <DatePick isDisable={isDisable(category, "date")} />
+          )}
         </>
       );
     },
@@ -80,7 +86,6 @@ const FilterBar: FC<FilterProps> = ({ type }) => {
           : renderByCategory(filtersOptions.topheadlines)}
       </FilterBarContainer>
       <FilterBarSmallScreen isSmall={isSmallSearch} type={type}>
-        {/* {type === CatergoryType.everything && ( */}
         <Dropdown
           isOpenDropdown={closeDropdowns}
           isDisable={type === CatergoryType.topheadlines}
@@ -88,7 +93,6 @@ const FilterBar: FC<FilterProps> = ({ type }) => {
           title="sortby"
           items={filtersOptions.everything["sortby"]}
         />
-        {/* )} */}
         <Icon
           style={{
             cursor: "pointer",

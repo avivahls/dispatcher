@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import { LIGHT_GREY_4 } from "../../style/Colors";
-import { FlexCol, FlexRowCenter, MOBILE_SIZE } from "../../style/layouts";
+import { LIGHT_GREY_4 } from "../../utils/colors";
+import { FlexCol, FlexRowCenter, MOBILE_SIZE } from "../../utils/layouts";
 
 export const SideBarContainer = styled(FlexCol)<{
   isShown: boolean;
@@ -81,6 +81,7 @@ export const SideBarIcon = styled.img`
 `;
 export const MainFilterCompStyle = styled(FlexCol)`
   height: 100vh;
+  bottom: 0;
   justify-content: space-between;
 `;
 export const SideBarButtonContainer = styled(FlexRowCenter)`

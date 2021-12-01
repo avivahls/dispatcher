@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useRef, useState } from "react";
+import React, { FC, useCallback, useRef, useState } from "react";
 import {
   DropdownSearch,
   InputStyle,
@@ -10,7 +10,7 @@ import {
 import Search from "../../assets/search.svg";
 import RecentSearch from "../RecentSearch/RecentSearch";
 import { CategoryDropdown } from "../Dropdown/CategoryDropdown";
-import useDebounce from "../../hooks/useDebounce";
+// import useDebounce from "../../hooks/useDebounce";
 import { useDispatch } from "react-redux";
 import { newsActions } from "../../store/news-slice";
 import { getApi } from "../../store/news-actions";

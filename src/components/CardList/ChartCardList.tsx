@@ -1,20 +1,13 @@
 import _ from "lodash";
 import moment from "moment";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  BarChartOptions,
-  BarChartState,
-  DoughnutChartOptions,
-  DoughnutChartState,
-  LineChartOptions,
-  LineChartState,
-} from "../../MockData";
+import { DoughnutChartOptions, LineChartOptions } from "../../MockData";
 
 import { newsActions, NewsGlobalState } from "../../store/news-slice";
 import { ChartCardStyle, IData } from "../Card/CardStyle";
 import ChartCard from "../Card/ChartCard";
-import { ChartType, IDoughnutData, ILineData } from "../Chart/ChartType";
+import { ChartType } from "../Chart/ChartType";
 import LineLoader from "../Loader/LineLoader";
 import PieLoader from "../Loader/PieLoader";
 import { ChartCardListStyle } from "./CardListStyle";
@@ -28,12 +21,6 @@ export interface ChartCardListProps {
 }
 
 const ChartCardList: FC<ChartCardListProps> = ({ loadState }) => {
-  // const [sourcesChart, setSourcesChart] = useState<IDoughnutData>(
-  //   DoughnutChartState as IDoughnutData
-  // );
-  // const [datesChart, setDatesChart] = useState<ILineData>(
-  //   LineChartState as ILineData
-  // );
   const dispatch = useDispatch();
   const sourcesChart = useSelector(
     (state: NewsGlobalState) => state.news.sourcesChart

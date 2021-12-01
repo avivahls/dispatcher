@@ -1,13 +1,11 @@
-import React, { FC, useCallback, useEffect, useRef, useState } from "react";
+import React, { FC, useCallback, useEffect, useRef } from "react";
 import {
   InputStyle,
   SearchAndRecentSmall,
-  SearchDivider,
   SmallSearchStyle,
 } from "./SearchStyle";
 import Back from "../../assets/back.svg";
 import { SideBarIcon } from "../SideBar/SideBarStyle";
-import useDebounce from "../../hooks/useDebounce";
 import { newsActions, NewsGlobalState } from "../../store/news-slice";
 import { getApi } from "../../store/news-actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +16,6 @@ import Search from "../../assets/search.svg";
 
 import RecentSearch from "../RecentSearch/RecentSearch";
 import { IconsContainer } from "../Header/HeaderStyle";
-import { DashboardDivider } from "../Home/HomeStyle";
 
 export interface SmallScreenProps {
   isSearch: boolean;
@@ -31,11 +28,11 @@ const SmallSearch: FC<SmallScreenProps> = ({
   isSearch,
 }) => {
   // const [searchTerm, setSearchTerm] = useState<string>("");
+  // const debouncedSearchTerm = useDebounce<string>(searchTerm, 500);
   const searchMode = useSelector(
     (state: NewsGlobalState) => state.news.smallSearchMode
   );
   const inputValue = useRef<HTMLInputElement>(null);
-  // const debouncedSearchTerm = useDebounce<string>(searchTerm, 500);
   const dispatch = useDispatch();
   const [recentSearchs, setRecentSearchs] = useLocalStorage("recent", []);
 
@@ -48,6 +45,9 @@ const SmallSearch: FC<SmallScreenProps> = ({
   //         setRecentSearchs([...recentSearchs, debouncedSearchTerm] as never[]);
   //   }
   // }, [debouncedSearchTerm, dispatch]);
+  useEffect(() => {
+    dispatch(newsActions.changeSearchValue(""));
+  }, []);
   useEffect(() => {
     dispatch(newsActions.changeSearchValue(inputValue?.current?.value));
     if (inputValue?.current?.value !== "") {
@@ -69,6 +69,15 @@ const SmallSearch: FC<SmallScreenProps> = ({
   const search = () => {
     dispatch(newsActions.setSmallSearchMode(true));
     dispatch(newsActions.changeSearchValue(inputValue?.current?.value));
+    if (inputValue?.current?.value !== "") {
+      recentSearchs.length === 0
+        ? setRecentSearchs([inputValue?.current?.value] as never[])
+        : !recentSearchs.includes(inputValue?.current?.value as never) &&
+          setRecentSearchs([
+            ...recentSearchs,
+            inputValue?.current?.value,
+          ] as never[]);
+    }
     dispatch(newsActions.setPageNumber(1));
     dispatch(getApi(false));
   };
@@ -77,6 +86,9 @@ const SmallSearch: FC<SmallScreenProps> = ({
       search();
       if (inputValue.current)
         inputValue.current.value = `"${inputValue.current.value.toUpperCase()}"`;
+    } else {
+      if (inputValue.current)
+        inputValue.current.value = `${inputValue.current.value}`;
     }
   };
   const setSearchValue = (item: string) => {
@@ -104,6 +116,13 @@ const SmallSearch: FC<SmallScreenProps> = ({
               dispatch(newsActions.setSmallSearchMode(false));
               if ((e.target as HTMLInputElement).value === "") {
                 search();
+              } else if (
+                String(inputValue?.current?.value).substr(0, 1) === '"'
+              ) {
+                if (inputValue.current)
+                  inputValue.current.value = String(inputValue.current.value)
+                    .toLowerCase()
+                    .substr(1);
               }
             }}
           ></InputStyle>
@@ -117,7 +136,6 @@ const SmallSearch: FC<SmallScreenProps> = ({
                 if (inputValue?.current?.value !== "" && !searchMode) {
                   if (inputValue.current) {
                     inputValue.current.value = "";
-                    // setSearchTerm("");
                     dispatch(newsActions.setSmallSearchMode(false));
                   }
                 }

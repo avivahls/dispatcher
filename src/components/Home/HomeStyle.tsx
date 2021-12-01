@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { GREY } from "../../style/Colors";
-import { FlexRow, IPAD_SIZE, MOBILE_SIZE } from "../../style/layouts";
+import { GREY } from "../../utils/colors";
+import { FlexRow, IPAD_SIZE, MOBILE_SIZE } from "../../utils/layouts";
 
 export const Dashboard = styled(FlexRow)<{ isSmall: boolean }>`
   position: relative;
@@ -9,7 +9,7 @@ export const Dashboard = styled(FlexRow)<{ isSmall: boolean }>`
   height: 100%;
   justify-content: space-between;
   align-items: stretch;
-  z-index: ${(props) => (props.isSmall ? 10 : 1)}; //
+  z-index: ${(props) => (props.isSmall ? 10 : 1)};
   overflow: visible;
   @media only screen and (max-width: ${IPAD_SIZE}) {
     width: 95%;
@@ -34,7 +34,7 @@ export const DashboardTitleTotal = styled.div`
   color: ${GREY};
   width: 80%;
   margin: 10px auto;
-  padding-left: 10px;
+  padding-left: 20px;
   @media only screen and (max-width: ${IPAD_SIZE}) {
     width: 95%;
   }

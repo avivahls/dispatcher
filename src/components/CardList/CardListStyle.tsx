@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FlexCol, IPAD_SIZE, MOBILE_SIZE } from "../../style/layouts";
+import { FlexCol, IPAD_SIZE, MOBILE_SIZE } from "../../utils/layouts";
 
 export const CardList = styled(FlexCol)`
   padding: 0;

@@ -5,7 +5,7 @@ import {
   filtersHeaders,
   languages,
   sortBy,
-} from "../../style/layouts";
+} from "../../utils/layouts";
 import { SideBarFilterStyle } from "../FilterBar/FilterBarStyle";
 
 export interface SideBarFilterProps {
@@ -37,7 +37,7 @@ export const SideBarFilter = ({
         return coutries.filter((data: any) => data.id === item)[0]?.value;
       case "language":
         return languages.filter((data: any) => data.id === item)[0]?.value;
-      case "sortBy":
+      case "sortby":
         return sortBy.filter((data: any) => data.id === item)[0]?.value;
       default:
         return item;

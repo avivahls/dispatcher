@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import { BORDER_COLOR, DROPDOWN_HOVER, GREY, SHADOW } from "../../style/Colors";
-import { FlexCol, FlexRow } from "../../style/layouts";
+import { BORDER_COLOR, DROPDOWN_HOVER, GREY, SHADOW } from "../../utils/colors";
+import { FlexCol, FlexRow } from "../../utils/layouts";
 import "./../../index.css";
 
 export const DropdownContainer = styled(FlexCol)<{
@@ -94,7 +94,9 @@ export const DropdownList = styled.ul`
   font-size: 16px;
   background: white;
   border: 1px solid ${BORDER_COLOR};
-  box-shadow: 0px 4px 12px ${SHADOW};
+  /* box-shadow: 0px 4px 12px ${SHADOW}; */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+
   border-radius: 10px;
   overflow: scroll;
   height: min(100%, 7.875rem);

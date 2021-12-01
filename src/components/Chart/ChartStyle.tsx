@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { GREY } from "../../style/Colors";
-import { FlexCol, FlexRow } from "../../style/layouts";
+import { GREY } from "../../utils/colors";
+import { FlexCol, FlexRow } from "../../utils/layouts";
 
 export const LegendListContainer = styled(FlexCol)`
   height: 45%;

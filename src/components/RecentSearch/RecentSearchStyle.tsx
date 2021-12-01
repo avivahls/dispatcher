@@ -4,8 +4,8 @@ import {
   DROPDOWN_HOVER,
   GREY,
   LIGHT_GREY_4,
-} from "../../style/Colors";
-import { FlexCol, FlexRow } from "../../style/layouts";
+} from "../../utils/colors";
+import { FlexCol, FlexRow } from "../../utils/layouts";
 
 export const RecentSearchContainer = styled(FlexCol)`
   color: ${GREY};

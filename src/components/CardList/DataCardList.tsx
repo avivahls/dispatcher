@@ -8,7 +8,6 @@ import { NoDataContainer, NoDataCStyle } from "../NoData/NoDataStyle";
 import { DataCardListStyle, NoDataListStyle } from "./CardListStyle";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getApi } from "../../store/news-actions";
-import { useAlert } from "react-alert";
 
 export interface DataCardListProps {
   loadState: boolean;
@@ -44,9 +43,9 @@ const DataCardList: FC<DataCardListProps> = ({ loadState }) => {
         <DataCardListStyle id="scrollableDiv">
           {loadState ? (
             <>
-              <MyLoader isMobileMode={false} />
-              <MyLoader isMobileMode={false} />
-              <MyLoader isMobileMode={false} />
+              <MyLoader />
+              <MyLoader />
+              <MyLoader />
             </>
           ) : (
             <InfiniteScroll

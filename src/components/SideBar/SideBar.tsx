@@ -16,8 +16,7 @@ import { SideBarButton } from "../Button/ButtonStyle";
 import { getApi } from "../../store/news-actions";
 import DatePicker from "react-datepicker";
 import moment from "moment";
-import { coutries, languages, sortBy } from "../../style/layouts";
-import { LIGHT_GREY_4 } from "../../style/Colors";
+import { coutries, languages, sortBy } from "../../utils/layouts";
 import _ from "lodash";
 
 export interface SideBarProps {
@@ -32,6 +31,9 @@ const SideBar: FC<SideBarProps> = ({ isShown, type }) => {
   const isSmallScreanSearch = useSelector(
     (state: NewsGlobalState) => state.news.smallSearchMode
   );
+  const searchValue = useSelector(
+    (state: NewsGlobalState) => state.news.searchValue
+  );
   const [isMainCategory, setIsMainCategory] = useState(false);
   const onChange = (dates: any) => {
     const [start, end] = dates;
@@ -44,8 +46,6 @@ const SideBar: FC<SideBarProps> = ({ isShown, type }) => {
       })
     );
     if (end) {
-      // dispatch(newsActions.setPageNumber(1));
-      // dispatch(getApi(false));
       setFilterState("filters");
     }
   };
@@ -110,7 +110,7 @@ const SideBar: FC<SideBarProps> = ({ isShown, type }) => {
         return coutries.filter((data: any) => data.id === item)[0]?.value;
       case "language":
         return languages.filter((data: any) => data.id === item)[0]?.value;
-      case "sortBy":
+      case "sortby":
         return sortBy.filter((data: any) => data.id === item)[0]?.value;
       default:
         return item;
@@ -131,85 +131,81 @@ const SideBar: FC<SideBarProps> = ({ isShown, type }) => {
     dispatch(getApi(false));
     dispatch(newsActions.changeShow());
   };
-  const renderByCategory = useCallback(
-    (category) => {
-      return (
-        <>
+  const renderByCategory = (category: any) => {
+    return (
+      <>
+        <SideBarFilter
+          isDisable={false}
+          title="Search in"
+          selected={
+            mainCategory === "everything" ? "Everything" : "Top Headlines"
+          }
+          onClickHandle={() => {
+            setFilterState("options");
+            setSubCategory("Search in");
+            setIsMainCategory(true);
+          }}
+        />
+        {Object.keys(category).map((item, key) => {
+          return (
+            item !== "sortby" && (
+              <SideBarFilter
+                isDisable={isDisable(category, item)}
+                key={key}
+                title={item}
+                selected={
+                  item !== "sources"
+                    ? item === "category"
+                      ? selectedFilters[type][item]
+                        ? String(selectedFilters[type][item])
+                            .substr(0, 1)
+                            .toUpperCase() +
+                          String(selectedFilters[type][item]).substr(1)
+                        : ""
+                      : selectedFilters[type][item]
+                      ? String(selectedFilters[type][item])
+                      : ""
+                    : selectedFilters[type][item][0]
+                    ? getIdOutValue(item, selectedFilters[type][item][0])
+                    : ""
+                }
+                onClickHandle={() => {
+                  if (!isDisable(category, item)) {
+                    setFilterState("options");
+                    setSubCategory(item);
+                    setIsMainCategory(false);
+                  }
+                }}
+              />
+            )
+          );
+        })}
+        {category === filtersOptions.everything && (
           <SideBarFilter
-            isDisable={false}
-            title="Search in"
+            isDisable={isDisable(category, "Date")}
+            title="Date"
             selected={
-              mainCategory === "everything" ? "Everything" : "Top Headlines"
+              endDate
+                ? `${moment(new Date(startDate)).format("DD/MM/YY")}-${moment(
+                    new Date(endDate)
+                  ).format("DD/MM/YY")}`
+                : ``
             }
             onClickHandle={() => {
-              setFilterState("options");
-              setSubCategory("Search in");
-              setIsMainCategory(true);
-            }}
-          />
-          {Object.keys(category).map((item, key) => {
-            return (
-              item !== "sortby" && (
-                <SideBarFilter
-                  isDisable={isDisable(category, item)}
-                  key={key}
-                  title={item}
-                  selected={
-                    item !== "sources"
-                      ? item === "category"
-                        ? selectedFilters[type][item]
-                          ? String(selectedFilters[type][item])
-                              .substr(0, 1)
-                              .toUpperCase() +
-                            String(selectedFilters[type][item]).substr(1)
-                          : ""
-                        : selectedFilters[type][item]
-                        ? String(selectedFilters[type][item])
-                        : ""
-                      : selectedFilters[type][item][0]
-                      ? getIdOutValue(item, selectedFilters[type][item][0])
-                      : ""
-                  }
-                  onClickHandle={() => {
-                    if (!isDisable(category, item)) {
-                      setFilterState("options");
-                      setSubCategory(item);
-                      setIsMainCategory(false);
-                    }
-                  }}
-                />
-              )
-            );
-          })}
-          {category === filtersOptions.everything && (
-            <SideBarFilter
-              isDisable={false}
-              title="Date"
-              selected={
-                endDate
-                  ? `${moment(new Date(startDate)).format("DD/MM/YY")}-${moment(
-                      new Date(endDate)
-                    ).format("DD/MM/YY")}`
-                  : ``
-              }
-              onClickHandle={() => {
+              if (!isDisable(category, "Date")) {
                 setFilterState("options");
                 setSubCategory("Date");
                 setIsMainCategory(false);
-              }}
-            />
-          )}
-        </>
-      );
-    },
-    [type, selectedFilters, mainCategory, filtersOptions, endDate, startDate]
-  );
+              }
+            }}
+          />
+        )}
+      </>
+    );
+  };
   const isDisable = (category: any, item: string) => {
     if (category === filtersOptions.topheadlines) {
       if (item === "sources") {
-        console.log(selectedFilters);
-        console.log(selectedFilters.topheadlines.country.length);
-        console.log(selectedFilters.topheadlines.category.length);
         return selectedFilters.topheadlines.country.length > 0 ||
           selectedFilters.topheadlines.category.length > 0
           ? true
@@ -220,6 +216,10 @@ const SideBar: FC<SideBarProps> = ({ isShown, type }) => {
       }
       if (item === "country") {
         return selectedFilters.topheadlines.sources.length > 0 ? true : false;
+      }
+    } else {
+      if (item !== "sources") {
+        return searchValue === "";
       }
     }
     return false;
@@ -251,7 +251,7 @@ const SideBar: FC<SideBarProps> = ({ isShown, type }) => {
           <>
             <DropdownBoldHeader
               style={{ marginTop: "16px", marginBottom: "16px" }}
-              isDisable={isDisable(mainCategory, subCategory)}
+              isDisable={false}
             >
               <SideBarIcon
                 src={Back}

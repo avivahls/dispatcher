@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { BLUE, DARK_GREY } from "../../style/Colors";
+import { BLUE, DARK_GREY } from "../../utils/colors";
 import {
   FlexRow,
   FlexRowCenter,
   IPAD_SIZE,
   MOBILE_SIZE,
-} from "../../style/layouts";
+} from "../../utils/layouts";
 
 export const HeaderStyle = styled(FlexRow)`
   justify-content: space-between;

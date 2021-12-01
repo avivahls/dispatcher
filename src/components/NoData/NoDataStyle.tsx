@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import NotFound from "../../assets/not-found.svg";
 import Chart from "../../assets/chart.svg";
-import { FlexColCenter, MOBILE_SIZE } from "../../style/layouts";
+import { FlexColCenter, MOBILE_SIZE } from "../../utils/layouts";
 
 export const NoDataContainer = styled(FlexColCenter)`
   width: 100%;
