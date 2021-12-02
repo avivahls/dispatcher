@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BORDER_COLOR, DROPDOWN_HOVER } from "../../style/Colors";
+import { BORDER_COLOR, DROPDOWN_HOVER } from "../../style/colors";
 import { FlexRow, IPAD_SIZE } from "../../style/layouts";
 import "./../../index.css";
 

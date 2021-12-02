@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { DARK_GREY, GREY, LIGHT_GREY_4 } from "../../style/Colors";
+import { DARK_GREY, GREY, LIGHT_GREY_4 } from "../../style/colors";
 import { FlexColCenter, FlexRow, IPAD_SIZE } from "../../style/layouts";
 
 export const WelcomeContainer = styled(FlexRow)`

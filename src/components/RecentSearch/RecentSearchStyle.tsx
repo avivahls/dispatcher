@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { DROPDOWN_HOVER } from "../../style/Colors";
+import { DROPDOWN_HOVER } from "../../style/colors";
 import { FlexCol, FlexRow } from "../../style/layouts";
 
 export const RecentSearchContainer = styled(FlexCol)`

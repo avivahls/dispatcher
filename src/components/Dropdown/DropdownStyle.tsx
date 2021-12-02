@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BORDER_COLOR, DROPDOWN_HOVER, GREY, SHADOW } from "../../style/Colors";
+import { BORDER_COLOR, DROPDOWN_HOVER, GREY, SHADOW } from "../../style/colors";
 import { FlexCol, FlexRow } from "../../style/layouts";
 import "./../../index.css";
 

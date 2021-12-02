@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BLUE, DARK_GREY } from "../../style/Colors";
+import { BLUE, DARK_GREY } from "../../style/colors";
 import { FlexRow, IPAD_SIZE, MOBILE_SIZE } from "../../style/layouts";
 
 export const HeaderStyle = styled(FlexRow)`

@@ -1,4 +1,4 @@
-import { BLUE, CHART_COLORS, LINE_BACKGROUND } from "./style/Colors";
+import { BLUE, CHART_COLORS, LINE_BACKGROUND } from "./style/colors";
 import { IData } from "./components/Card/CardStyle";
 import { IChartData } from "./components/Chart/ChartType";
 
@@ -82,8 +82,7 @@ export const DUMMY2: IData = {
     "Knife found beneath Parliament to be returned to Algonquin nations in historic move | CBC News",
   description:
     "An ancient knife recovered during renovations on Parliament Hill will be returned to Algonquin nations. It's estimated to be 4,000 years old.",
-  url:
-    "http://www.cbc.ca/news/politics/parliament-knife-return-algonquin-nations-1.6214350",
+  url: "http://www.cbc.ca/news/politics/parliament-knife-return-algonquin-nations-1.6214350",
   urlToImage:
     "https://i.cbc.ca/1.6077117.1624470867!/fileImage/httpImage/image.JPG_gen/derivatives/16x9_620/2021-parliament-centre-block-rehabilitation-construction.JPG",
   publishedAt: "2021-10-17T16:52:24.4379934Z",

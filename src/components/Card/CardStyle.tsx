@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { CARD_HEADER, GREY, LIGHT_GREY_2, SHADOW } from "../../style/Colors";
+import { CARD_HEADER, GREY, LIGHT_GREY_2, SHADOW } from "../../style/colors";
 import { FlexRow, FlexRowCenter, MOBILE_SIZE } from "../../style/layouts";
 
 export const BasicCard = styled(FlexRowCenter)`

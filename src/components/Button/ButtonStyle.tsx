@@ -4,7 +4,7 @@ import {
   GREY,
   LIGHT_GREY_2,
   TEXT_BTN_BACKGROUND,
-} from "../../style/Colors";
+} from "../../style/colors";
 
 export const ButtonStyled = styled.button`
   display: flex;
