@@ -1,17 +1,17 @@
 import styled from "styled-components";
-import { BLUE, DARK_GREY } from "../../style/Colors";
+import { BLUE, DARK_GREY } from "../../utils/colors";
 import {
   FlexRow,
   FlexRowCenter,
   IPAD_SIZE,
   MOBILE_SIZE,
-} from "../../style/layouts";
+} from "../../utils/layouts";
 
 export const HeaderStyle = styled(FlexRow)`
   justify-content: space-between;
   background-color: ${DARK_GREY};
   width: 100%;
-  height: 65px;
+  height: 74px;
 `;
 export const UserStyle = styled(FlexRowCenter)`
   background-color: ${BLUE};
@@ -19,15 +19,16 @@ export const UserStyle = styled(FlexRowCenter)`
   width: 50px;
   height: 50px;
   align-items: center;
-  margin: auto 5px;
+  margin: auto 0px;
+  margin-left: 15px;
   cursor: pointer;
   @media only screen and (max-width: ${IPAD_SIZE}) {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
   }
   @media only screen and (max-width: ${MOBILE_SIZE}) {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
   }
 `;
 export const IconsContainer = styled(FlexRow)`
@@ -35,10 +36,14 @@ export const IconsContainer = styled(FlexRow)`
   align-items: center;
   color: white;
   float: right;
-  margin: auto 15px;
+  margin: auto 10px;
 `;
 export const LogoContainer = styled.div`
   width: 10%;
+  margin: auto 5px;
+  @media only screen and (max-width: 820px) and (min-width: ${MOBILE_SIZE}) {
+    margin-right: 30px;
+  }
 `;
 export const SearchContainer = styled.div`
   width: 80%;

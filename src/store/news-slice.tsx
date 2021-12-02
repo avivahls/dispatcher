@@ -1,32 +1,104 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { IDoughnutData, ILineData } from "../components/Chart/ChartType";
 import { CatergoryType, Filters } from "../components/FilterBar/FilterBarStyle";
-import { FilterOptions, selectedFilters } from "../style/layouts";
-
+import { DoughnutChartState, LineChartState } from "../MockData";
+import { FilterOptions, selectedFiltersOptions } from "../utils/layouts";
 export interface NewsGlobalState {
   news: {
+    totalResults: number;
+    isFiltered: boolean;
+    isFirstData: boolean;
+    moreDataToScroll: boolean;
+    smallSearchMode: boolean;
+    errorMessage: string;
     isLoading: boolean;
+    pageNumber: number;
     category: CatergoryType;
     searchValue: string;
     filters: Filters;
     selectedFilters: Filters;
-    datesFilters: Date[];
+    datesFilters: [];
     data: [];
     ShowSideBar: boolean;
+    sourcesChart: IDoughnutData;
+    datesChart: ILineData;
   };
 }
 const newsSlice = createSlice({
   name: "news",
   initialState: {
+    totalResults: 0,
+    isFiltered: true,
+    isFirstData: false,
+    moreDataToScroll: true,
+    smallSearchMode: false,
+    errorMessage: "",
     isLoading: false,
+    pageNumber: 0,
     category: CatergoryType.topheadlines,
     searchValue: "",
     filters: FilterOptions,
-    selectedFilters: selectedFilters,
-    datesFilters: [new Date(), null],
+    selectedFilters: selectedFiltersOptions,
+    datesFilters: [new Date().toISOString(), null],
     data: [],
     ShowSideBar: false,
+    sourcesChart: DoughnutChartState,
+    datesChart: LineChartState,
   },
   reducers: {
+    setTotal(state, action) {
+      state.totalResults = action.payload;
+    },
+    setIsFirst(state, action) {
+      state.isFirstData = action.payload;
+    },
+    setSourcesChart(state, action) {
+      state.sourcesChart = action.payload;
+    },
+    setDatesChart(state, action) {
+      state.datesChart = action.payload;
+    },
+    setMoreDataToScroll(state, action) {
+      state.moreDataToScroll = action.payload;
+    },
+    setSmallSearchMode(state, action) {
+      state.smallSearchMode = action.payload;
+    },
+    setErrorMessage(state, action) {
+      state.errorMessage = action.payload;
+    },
+    setPageNumber(state, action) {
+      state.pageNumber = action.payload;
+    },
+    clearFilters(state) {
+      state.selectedFilters = selectedFiltersOptions;
+      newsSlice.caseReducers.isFiltered(state);
+    },
+    clearSelectedFilters(state, action) {
+      const subCategory = action.payload.subCategory;
+      switch (subCategory) {
+        case "sortby":
+          state.selectedFilters.everything.sortby = [];
+          break;
+        case "language":
+          state.selectedFilters.everything.language = [];
+          break;
+        case "country":
+          state.selectedFilters.topheadlines.country = [];
+          break;
+        case "category":
+          state.selectedFilters.topheadlines.category = [];
+          break;
+        case "sources": {
+          if (state.category === CatergoryType.everything) {
+            state.selectedFilters.everything.sources = [];
+          } else {
+            state.selectedFilters.topheadlines.sources = [];
+          }
+        }
+      }
+      newsSlice.caseReducers.isFiltered(state);
+    },
     changeLoading(state, action) {
       state.isLoading = action.payload;
     },
@@ -34,7 +106,7 @@ const newsSlice = createSlice({
       state.data = action.payload;
     },
     getSources(state, action) {
-      action.payload.forEach((item: string) => {
+      action.payload.forEach((item: any) => {
         state.filters.everything.sources.push(item);
         state.filters.topheadlines.sources.push(item);
       });
@@ -52,6 +124,19 @@ const newsSlice = createSlice({
       const startDate = action.payload.from;
       const endDate = action.payload.to;
       state.datesFilters = [startDate, endDate];
+    },
+    isFiltered(state) {
+      if (
+        state.selectedFilters.everything.sources[0] ||
+        state.selectedFilters.everything.language[0] ||
+        state.selectedFilters.topheadlines.country[0] ||
+        state.selectedFilters.topheadlines.category[0] ||
+        state.selectedFilters.topheadlines.sources[0]
+      ) {
+        state.isFiltered = true;
+      } else {
+        state.isFiltered = false;
+      }
     },
     addOptions(state, action) {
       const subCategory = action.payload.category;
@@ -78,6 +163,7 @@ const newsSlice = createSlice({
           }
         }
       }
+      newsSlice.caseReducers.isFiltered(state);
     },
   },
 });

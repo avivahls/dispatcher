@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DownIcon from "../../assets/dropdown.svg";
 import { getApi } from "../../store/news-actions";
 import { newsActions, NewsGlobalState } from "../../store/news-slice";
-import { LIGHT_GREY_4 } from "../../style/Colors";
+import { LIGHT_GREY_4 } from "../../utils/colors";
 import { CatergoryType } from "../FilterBar/FilterBarStyle";
 
 import {
@@ -34,22 +33,24 @@ export const CategoryDropdown = () => {
         ? CatergoryType.everything
         : CatergoryType.topheadlines;
     dispatch(newsActions.changeCategory(category));
-    dispatch(getApi(false, 1));
+    // dispatch(newsActions.clearFilters());
+    dispatch(newsActions.setPageNumber(1));
+    dispatch(getApi(false));
   };
-  const toggling = useCallback(() => {
+  const toggling = () => {
     setIsOpen((prevIsOpen) => !prevIsOpen);
-  }, []);
+  };
 
   return (
-    <DropdownContainer>
-      <DropdownHeader onClick={toggling}>
-        {selectedOption}
+    <DropdownContainer isDisable={false} isSmall={false}>
+      <DropdownHeader isDisable={false} onClick={toggling}>
+        {selectedOption === "everything" ? "Everything" : "Top Headlines"}
         <img src={DownIcon} alt="down icon of dropdown"></img>
       </DropdownHeader>
       {isOpen && (
-        <DropdownListContainer>
+        <DropdownListContainer isDisable={false} isSmall={false}>
           <DropdownList>
-            {Object.keys(categories).map((item: string) => (
+            {Object.keys(categories).map((item: string, key: number) => (
               <DropdownItem
                 onClick={() => onOptionClicked(item)}
                 key={Math.random()}
@@ -59,7 +60,7 @@ export const CategoryDropdown = () => {
                     : {}
                 }
               >
-                {item}
+                {item === "everything" ? "Everything" : "Top Headlines"}
               </DropdownItem>
             ))}
           </DropdownList>
