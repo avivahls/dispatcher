@@ -1,30 +1,73 @@
 import React, { FC } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { newsActions, NewsGlobalState } from "../../store/news-slice";
 import { IData } from "../Card/CardStyle";
 import DataCard from "../Card/DataCard";
+import MyLoader from "../Loader/loader";
 import { NoDataContainer, NoDataCStyle } from "../NoData/NoDataStyle";
-import { DataCardListStyle } from "./CardListStyle";
+import { DataCardListStyle, NoDataListStyle } from "./CardListStyle";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { getApi } from "../../store/news-actions";
 
 export interface DataCardListProps {
-  news: IData[];
+  loadState: boolean;
 }
-const DataCardList: FC<DataCardListProps> = ({ news }) => {
+
+const DataCardList: FC<DataCardListProps> = ({ loadState }) => {
+  const dispatch = useDispatch();
+  const moreToLoad = useSelector(
+    (state: NewsGlobalState) => state.news.moreDataToScroll
+  );
+  const pageNumber = useSelector(
+    (state: NewsGlobalState) => state.news.pageNumber
+  );
+  const news = useSelector((state: NewsGlobalState) => state.news.data);
+  const error = useSelector(
+    (state: NewsGlobalState) => state.news.errorMessage
+  );
+  const nextData = () => {
+    const temp = pageNumber + 1;
+    dispatch(newsActions.setPageNumber(temp));
+    dispatch(getApi(false));
+  };
   return (
-    <DataCardListStyle>
-      {news.length === 0 ? (
-        <>
+    <>
+      {!loadState && news.length === 0 ? (
+        <NoDataListStyle>
           <NoDataContainer>
             <NoDataCStyle />
-            <p>We couldn't find any matches for your query</p>
+            {error === "" && "We couldn't find any matches for your query"}
           </NoDataContainer>
-        </>
+        </NoDataListStyle>
       ) : (
-        <>
-          {news.map((item: IData, key: number) => (
-            <DataCard data={item} key={key}></DataCard>
-          ))}
-        </>
+        <DataCardListStyle id="scrollableDiv">
+          {loadState ? (
+            <>
+              <MyLoader />
+              <MyLoader />
+              <MyLoader />
+            </>
+          ) : (
+            <InfiniteScroll
+              dataLength={news.length}
+              next={nextData}
+              hasMore={moreToLoad}
+              loader={<p>loading...</p>}
+              scrollableTarget="scrollableDiv"
+              endMessage={
+                <p style={{ textAlign: "center" }}>
+                  <b>Yay! You have seen it all</b>
+                </p>
+              }
+            >
+              {news.map((item: IData, key: number) => (
+                <DataCard data={item} key={key}></DataCard>
+              ))}
+            </InfiniteScroll>
+          )}
+        </DataCardListStyle>
       )}
-    </DataCardListStyle>
+    </>
   );
 };
 export default DataCardList;

@@ -32,13 +32,12 @@ const Welcome: FC = () => {
           <WelcomeButton
             onClick={() =>
               loginWithRedirect({
-                display: "popup",
                 redirectUri: "http://localhost:3000/home",
               })
             }
           >
             CONTINUE
-            <Icon src={Arrow} />
+            <Icon isFiltered={false} isSmall={false} src={Arrow} />
           </WelcomeButton>
         </WelcomeData>
       </WelcomeContent>

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FlexCol, IPAD_SIZE } from "../../style/layouts";
+import { FlexCol, IPAD_SIZE, MOBILE_SIZE } from "../../utils/layouts";
 
 export const CardList = styled(FlexCol)`
   padding: 0;
@@ -13,13 +13,23 @@ export const DataCardListStyle = styled(CardList)`
   height: 100vh;
   position: sticky;
   align-self: flex-start;
+  overflow-y: auto;
+  justify-content: start;
+  z-index: 10;
   @media only screen and (max-width: ${IPAD_SIZE}) {
     width: 100%;
   }
+  @media only screen and (max-width: ${MOBILE_SIZE}) {
+    width: 100%;
+  }
+`;
+export const NoDataListStyle = styled(DataCardListStyle)`
+  width: 100%;
 `;
 export const ChartCardListStyle = styled(CardList)`
   width: fit-content;
   overflow: visible;
+
   @media only screen and (max-width: ${IPAD_SIZE}) {
     display: none;
   }

@@ -1,56 +1,128 @@
-import { BLUE, CHART_COLORS, LINE_BACKGROUND } from "./style/colors";
+import { BLUE, CHART_COLORS, LINE_BACKGROUND } from "./utils/colors";
 import { IData } from "./components/Card/CardStyle";
 import { IChartData } from "./components/Chart/ChartType";
 
 export const LineChartOptions = {
-  tension: 1,
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      display: false,
+    },
+  },
+  scales: {
+    x: {
+      grid: {
+        display: false,
+      },
+      ticks: {
+        display: true,
+      },
+    },
+    y: {
+      display: false,
+      beginAtZero: true,
+      ticks: {
+        display: false,
+      },
+      grid: {
+        display: false,
+      },
+    },
+  },
+  tension: 0.5,
   fill: {
     target: "origin",
   },
-  responsive: true,
-  maintainAspectRatio: false,
 };
 export const BarChartOptions = {
   indexAxis: "y",
   borderRadius: 100,
   responsive: true,
+  barThickness: 16,
+  barPercentage: 0.5,
+  layout: {
+    labels: {
+      color: "rgb(255, 99, 132)",
+      font: {
+        family: "Mulish",
+      },
+    },
+    padding: {
+      top: 0,
+      bottom: 0,
+    },
+  },
+  scales: {
+    x: {
+      ticks: {
+        display: false,
+      },
+      grid: {
+        display: false,
+      },
+    },
+    y: {
+      grid: {
+        display: false,
+      },
+    },
+  },
   maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      display: false,
+    },
+  },
 };
 export const DoughnutChartOptions = {
-  cutout: "80%",
-  radius: "60%",
-  responsive: true,
-  maintainAspectRatio: false,
+  cutout: "85%",
+  plugins: {
+    legend: false as any,
+  },
 };
 
 export const LineChartState: IChartData = {
-  labels: ["January", "February", "March", "April", "May"],
+  labels: [],
   datasets: [
     {
-      label: "Rainfall",
       borderColor: BLUE,
       backgroundColor: LINE_BACKGROUND,
-      data: [65, 59, 80, 81, 56],
+      data: [],
     },
   ],
 };
 export const DoughnutChartState: IChartData = {
-  labels: ["January", "February", "March", "April", "May"],
+  labels: [],
   datasets: [
     {
-      label: "Rainfall",
       backgroundColor: CHART_COLORS,
-      data: [65, 59, 80, 81, 56],
+      data: [],
     },
   ],
 };
 export const BarChartState: IChartData = {
-  labels: ["January", "February", "March", "April", "May"],
+  labels: [
+    `#covid19   ${Number((10 / 61) * 100)
+      .toString()
+      .substr(0, 2)}%`,
+    `sport   ${Number((6 / 61) * 100)
+      .toString()
+      .substr(0, 2)}%`,
+    `israel   ${Number((8 / 61) * 100)
+      .toString()
+      .substr(0, 2)}%`,
+    `Economy   ${Number((15 / 61) * 100)
+      .toString()
+      .substr(0, 2)}%`,
+    `Crime   ${Number((12 / 61) * 100)
+      .toString()
+      .substr(0, 2)}%`,
+  ],
   datasets: [
     {
-      label: "Rainfall",
       backgroundColor: BLUE,
-      data: [65, 59, 80, 81, 56],
+      data: [10, 6, 8, 15, 12],
     },
   ],
 };
@@ -88,4 +160,18 @@ export const DUMMY2: IData = {
   publishedAt: "2021-10-17T16:52:24.4379934Z",
   content:
     "An ancient Indigenous knife unearthed during the renovation of Centre Block will be the first artifact found on Parliament Hill to be returned to the stewardship of the Algonquin people who live in t… [+3927 chars]",
+};
+export const EmptyDUMMY: IData = {
+  source: {
+    id: "",
+    name: "",
+  },
+  tags: [],
+  author: "",
+  title: "",
+  description: "",
+  url: "",
+  urlToImage: "",
+  publishedAt: "",
+  content: null,
 };

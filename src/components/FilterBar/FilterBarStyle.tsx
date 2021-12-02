@@ -1,8 +1,17 @@
-import styled from "styled-components";
-import { BORDER_COLOR, DROPDOWN_HOVER } from "../../style/colors";
-import { FlexRow, IPAD_SIZE } from "../../style/layouts";
+import styled, { css } from "styled-components";
+import {
+  BORDER_COLOR,
+  DROPDOWN_HOVER,
+  GREY,
+  LIGHT_GREY_2,
+} from "../../utils/colors";
+import { FlexRow, IPAD_SIZE } from "../../utils/layouts";
 import "./../../index.css";
 
+export enum CatergoryType {
+  everything = "everything",
+  topheadlines = "topheadlines",
+}
 export const FilterBarContainer = styled(FlexRow)`
   justify-content: flex-start;
   width: 80%;
@@ -14,34 +23,59 @@ export const FilterBarContainer = styled(FlexRow)`
     display: none;
   }
 `;
-export const FilterBarSmallScreen = styled(FilterBarContainer)`
+export const FilterBarSmallScreen = styled(FilterBarContainer)<{
+  isSmall: boolean;
+  type: any;
+}>`
   display: none;
   width: 100%;
-  height: 60px;
+  height: 44px;
   margin: auto;
   padding: 5px;
-  justify-content: end;
+  border: 1px solid ${LIGHT_GREY_2};
+  ${(props) =>
+    props.isSmall
+      ? css`
+          z-index: 10;
+        `
+      : ``};
+  justify-content: space-between;
   background-color: white;
-  align-items: center;
-
+  align-self: center;
   @media only screen and (max-width: ${IPAD_SIZE}) {
     display: flex;
   }
 `;
-export const SideBarFilterStyle = styled(FlexRow)`
+export const SideBarFilterStyle = styled(FlexRow)<{
+  isDisable: boolean;
+  selected: boolean;
+}>`
+  color: ${GREY};
+  position: relative;
   justify-content: space-between;
   border-top: 1px solid ${BORDER_COLOR};
   margin: 0px;
   padding: 5px 15px;
+  z-index: 20;
   &:hover {
     background: ${DROPDOWN_HOVER};
   }
+  cursor: pointer;
+  ${(props) =>
+    props.isDisable
+      ? css`
+          opacity: 0.5;
+          cursor: not-allowed;
+        `
+      : ``};
+  ${(props) =>
+    props.selected
+      ? css`
+          background-color: ${DROPDOWN_HOVER};
+        `
+      : ``};
 `;
 
-export enum CatergoryType {
-  everything,
-  topHeadlines,
-}
 export enum SubCategoryType {
   sources,
   country,
@@ -52,10 +86,10 @@ export enum SubCategoryType {
 }
 export interface FilterProps {
   type: CatergoryType;
-  //filters: Filters;
+  isFirst: boolean;
 }
 export type Filters = {
   [CatergoryType: string]: {
-    [SubCategoryType: string]: string[];
+    [SubCategoryType: string]: any[];
   };
 };
